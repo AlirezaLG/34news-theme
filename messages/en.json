@@ -1,0 +1,11 @@
+{
+    "HomePage": {
+      "title": "Home Page Title !",
+      "description": "decription in home Page !"
+    },
+    "OtherPage": {
+      "title": "Hello world!",
+      "description": "decription in description !"
+    
+    }
+  }
