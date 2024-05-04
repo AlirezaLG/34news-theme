@@ -41,7 +41,7 @@ const getSiteData = cache(async () => {
 
 const mygetPosts = cache(async () => {
   try {
-    let res = await axios.get("/wp/v2/posts", {
+    let res = await axios.get("/wp/v2/posts/", {
       params: {
         per_page: 4,
         categories: null,

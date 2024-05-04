@@ -2,7 +2,7 @@ import React from 'react'
 
 function NotFound() {
   return (
-    <div>NotFound nothing sharks</div>
+    <div>NotFound nothing</div>
   )
 }
   

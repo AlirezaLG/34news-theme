@@ -4,9 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import NavigationMenu from "../NavigationMenu";
 
+
 export default function Header() {
   return (
     <header>
+      
       <TopHeader />
       <div className="container flex py-2">
         <Link href="/">

@@ -4,16 +4,18 @@ import https from "https";
 
 const config = getConfig();
 let axios;
-if (config) {
-  axios = Axios.create({
-    baseURL: config.publicRuntimeConfig.apiUrl,
-    headers: {},
-    withCredentials: true,
-    httpsAgent: new https.Agent({
-      rejectUnauthorized: false,
-    }),
-  });
-} else {
+
+
+// if (config) {
+//   axios = Axios.create({
+//     baseURL: config.publicRuntimeConfig.apiUrl,
+//     headers: {},
+//     withCredentials: true,
+//     httpsAgent: new https.Agent({
+//       rejectUnauthorized: false,
+//     }),
+//   });
+// } else {
   axios = Axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
     headers: {},
@@ -22,5 +24,5 @@ if (config) {
       rejectUnauthorized: false,
     }),
   });
-}
+// }
 export default axios;
