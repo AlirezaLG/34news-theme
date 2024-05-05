@@ -3,56 +3,85 @@ import BigImage from '@/components/BigImage';
 import ListNews from '@/components/ListNews';
 import SocialMedia from '@/components/SocialMedia';
 import FourPostinRow from '@/components/FourPostsinRow';
-import TranslationsProvider from '@/providers/TranslationsProvider';
+// import TranslationsProvider from '@/providers/TranslationsProvider';
 import initTranslations from '../../i18n';
+import PostTitle from '@/components/PostTitle';
+import Hcards from '@/components/Hcards';
+import Video from '@/components/Video';
+import Card1 from '@/components/Card1';
+import Hcard from '@/components/Hcard';
+import axios from "@/lib/axios";
 
-import {
-  mygetPosts,
-} from "@/lib/functions";
-
+import { getPageData, getPosts } from "@/lib/functions";
 
 
 const HomePage = async ({ params: { locale } }) => {
   const { t, resources } = await initTranslations(locale);
-  // export default  function  HomePage () {
-  //
-  // const t = await getTranslations('HomePage');
-
-  let [
-    posts,
-   ] = await Promise.all([
-    await mygetPosts(),
-  ]);
-
-  // const myPosts = await mygetPosts();
-  // const posts = await getLatestPost();
   
+  const homePageData = await getPageData("Home-sharks");
+  
+  // console.log(homePageData);
+  // console.log(homePageData?.acf_fields?.video?.col1);
+    const [
+      slideshow,
+      slideshow_right,
+      twoCols,
+      twoCols_right,
+      threeCols,
+      oneCols,
+      video1,
+      video2,
+      video3,
+    ] = await Promise.all([
+      homePageData?.acf_fields?.slideshow?.show
+        ? await getPosts(homePageData?.acf_fields?.slideshow)
+        : () => {},
+      homePageData?.acf_fields?.slideshow_right?.show
+        ? await getPosts(homePageData?.acf_fields?.slideshow_right)
+        : () => {},
+      homePageData?.acf_fields?.twoCols?.show
+        ? await getPosts(homePageData?.acf_fields?.twoCols)
+        : () => {},
+      homePageData?.acf_fields?.twoCols_right?.show
+        ? await getPosts(homePageData?.acf_fields?.twoCols_right)
+        : () => {},
+      homePageData?.acf_fields?.threeCols?.show
+        ? await getPosts(homePageData?.acf_fields?.threeCols)
+        : () => {},
+      homePageData?.acf_fields?.oneCols?.show
+        ? await getPosts(homePageData?.acf_fields?.oneCols)
+        : () => {},
+      homePageData?.acf_fields?.video?.show
+      ? await getPosts(homePageData?.acf_fields?.video?.col1)
+      : () => {},
+      homePageData?.acf_fields?.video?.show
+      ? await getPosts(homePageData?.acf_fields?.video?.col2)
+      : () => {},
+      homePageData?.acf_fields?.video?.show
+      ? await getPosts(homePageData?.acf_fields?.video?.col3)
+      : () => {},
+    ]);
+
+  
+  // console.log(slideshow);
   
   return (
-    <TranslationsProvider>
+    
         <main className="py-4">
-          {/* {posts.map((item ,i) => {
-            return (
-              <div>
-                {item.title.rendered}
-              </div>
-            )
-          })} */}
-          {/* <h1>before this </h1> */}
-          {/* first widget */}
+          
           {`${t("home")}`}
           <div className="container">
             <div className="grid md:grid-cols-4 xs:grid-cols-1 gap-5">
               <div className="md:col-span-3 py-2">
-                <BigImage />
+                <BigImage  />
               </div>
               <div className="py-2 ">
-                <iframe  style={{ with:"100%" , height:"220px" }}  src="https://www.youtube.com/embed/IwKeRHsxQTA?si=4m5eQ7U82XGw3XgD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe  style={{ with:"100%" , height:"220px" }}  src="https://www.youtube.com/embed/IwKeRHsxQTA?si=4m5eQ7U82XGw3XgD" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 <ListNews />
                 <SocialMedia />
               </div>
             </div>
-            <FourPostinRow posts={posts} />
+            <FourPostinRow posts={slideshow} widget={homePageData?.acf_fields?.slideshow} />
           </div>
     
 
@@ -108,7 +137,7 @@ const HomePage = async ({ params: { locale } }) => {
           </div> */}
     
         </main>
-        </TranslationsProvider>
+
       );
 }
 

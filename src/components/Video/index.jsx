@@ -1,7 +1,7 @@
 import React from 'react'
 import PostTitleBlack from '../PostTitleBlack'
 import Card1Black from '../Card1Black'
-import Hcard from '../Hcards/hcard'
+import Hcard from '../Hcard'
 
 export default function Video() {
   return (

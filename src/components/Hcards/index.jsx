@@ -1,5 +1,5 @@
 import React from 'react'
-import Hcard from './hcard'
+import Hcard from '../Hcard'
 export default function Hcards({content}) {
   return (
     <div className='space-y-5 py-5'>

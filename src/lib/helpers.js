@@ -1,15 +1,14 @@
 const getNavigationUrl = (item) => {
   switch (item.type) {
-    case "custom":
-      return item.url;
-    case "post_type":
-      if (item.type_label == "Post") {
-        return `/categories/${item?.post?.primary_category?.slug}/${item.slug}`;
-      }
+    // case "custom":
+    //   return item.url;
+    case "post":
+      return `/posts/${item?.primary_category?.slug}/${item.slug}`;
+    case "page":
       if (item.type_label == "Page") return `/${item.slug}`;
-    case "taxonomy":
-      if (item.type_label == "Category") return `/categories/${item.slug}`;
-      if (item.type_label == "Tag") return `/tags/${item.slug}`;
+    // case "taxonomy":
+    //   if (item.type_label == "Category") return `/categories/${item.slug}`;
+    //   if (item.type_label == "Tag") return `/tags/${item.slug}`;
     default:
       return item.url;
   }

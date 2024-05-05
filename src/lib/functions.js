@@ -58,7 +58,7 @@ const getPosts = cache(async (config) => {
   try {
     let res = await axios.get("/wp/v2/posts", {
       params: {
-        per_page: config.no_of_posts,
+        per_page: config.posts,
         categories: config.category ? [config.category] : null,
         page: config.page ?? 1,
       },
