@@ -1,11 +1,14 @@
 import React from 'react'
 import {
   getCategory,
-  getPost
+  getPost,
+  getPosts,
+  getPageData
 } from "@/lib/functions";
-import { getMetaFromYoast, getMonthAbbreviation } from "@/lib/helpers";
+import { getMetaFromYoast, getMonthAbbreviation,  } from "@/lib/helpers";
 import { headers } from "next/headers";
 import { decode } from 'html-entities';
+import ListNews from '@/components/ListNews';
 
 
 
@@ -18,16 +21,24 @@ export async function generateMetadata({ params: { category, slug } }) {
   return getMetaFromYoast(post?.yoast_head_json, pathname);
 }
 
-// const singlePage = async ({ params: { category, slug, } }) => {
-  
-// }
+// homePageData?.acf_fields?.single_page_sidebar?.show
+      // ? await getPosts(homePageData?.acf_fields?.single_page_sidebar)
+      // : () => {},
 
 export default async function SinglePage({ params: { category, slug, locate } }) {
-  const [categoryData, post] = await Promise.all([
+  const homePageData = await getPageData("Home-sharks");
+  const [categoryData, post, sidebar ] = await Promise.all([
     await getCategory(category),
     await getPost(slug),
+    await getPosts({
+          posts:
+            homePageData?.acf_fields?.single_page_sidebar?.posts ?? 3,
+          category: homePageData?.acf_fields?.single_page_sidebar?.category,
+        })
+
   ]);
-  console.log(post)
+  
+  
   return (
     <div  className='container py-5 grid grid-cols-3'>
         <div className="col-span-2">
@@ -43,7 +54,7 @@ export default async function SinglePage({ params: { category, slug, locate } })
           <div dangerouslySetInnerHTML={{ __html: decode(post?.content?.rendered) }}></div>
         </div>
         <div className="col-span-1">
-          right
+          <ListNews posts={sidebar}   />
         </div>
     </div>
   )

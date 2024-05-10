@@ -32,6 +32,7 @@ const HomePage = async ({ params: { locale } }) => {
       video1,
       video2,
       video3,
+      // single_page_sidebar,
     ] = await Promise.all([
       homePageData?.acf_fields?.slideshow?.show
         ? await getPosts(homePageData?.acf_fields?.slideshow)
@@ -60,6 +61,7 @@ const HomePage = async ({ params: { locale } }) => {
       homePageData?.acf_fields?.video?.show
       ? await getPosts(homePageData?.acf_fields?.video?.col3)
       : () => {},
+      
     ]);
 
   

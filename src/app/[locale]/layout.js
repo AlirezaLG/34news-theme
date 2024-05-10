@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
-// import initTranslations from '../../i18n';
+
 import initTranslations from "@/i18n";
 import CprogressBar from "@/components/CprogressBar";
 import { cache } from "react";
