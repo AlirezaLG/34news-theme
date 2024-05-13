@@ -1,21 +1,23 @@
 import Axios from "axios";
-import getConfig from "next/config";
+// import getConfig from "next/config";
 import https from "https";
+// const config = getConfig();
 
-const config = getConfig();
+
+
+let axiosGQL;
+  axiosGQL = Axios.create({
+  method: 'post',
+  maxBodyLength: Infinity,
+  baseURL: "http://localhost:8888/wordpress/graphql/",
+  headers: { 
+    'Content-Type': 'application/json'
+  }
+  
+});
+
+// REST API URL 
 let axios;
-
-
-// if (config) {
-//   axios = Axios.create({
-//     baseURL: config.publicRuntimeConfig.apiUrl,
-//     headers: {},
-//     withCredentials: true,
-//     httpsAgent: new https.Agent({
-//       rejectUnauthorized: false,
-//     }),
-//   });
-// } else {
   axios = Axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
     headers: {},
@@ -24,5 +26,9 @@ let axios;
       rejectUnauthorized: false,
     }),
   });
-// }
-export default axios;
+
+
+export {
+  axios,
+  axiosGQL
+};

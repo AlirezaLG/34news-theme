@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { routeMenu } from "@/lib/helpers";
 
-export default function NavigationMenu() {
+export default function NavigationMenu({menu}) {
+  // console.log(menu)
+  // console.log(menu.menuItems.nodes[1].childItems.nodes.length)
   const [isShowing, setIsShowing] = useState(false)
 
   return (
@@ -19,50 +22,45 @@ export default function NavigationMenu() {
             </button>
           </div>
           <div id="mega-menu" className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" >
-            <ul className="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
-              <li><a href="http://localhost:3000/" className="block py-2 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 " aria-current="page"> Home </a></li>
-              <li><button onMouseEnter={() => setIsShowing(true)} onMouseLeave={() => setIsShowing(false)} id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown" className="flex items-center justify-between w-full py-2 px-3 font-medium text-white border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0" >Company
-                  <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                  </svg>
-                </button>
-                <div   id="mega-menu-dropdown" className={`absolute z-10 grid hidden  w-auto grid-cols-3 text-sm bg-white border border-gray-100 rounded-lg shadow-md `}> 
-                  {/* ${ isShowing ? "block" : "hidden" } */}
-                  <div className="p-4 pb-0 text-white md:pb-4 ">
-                    <ul className="space-y-4" aria-labelledby="mega-menu-dropdown-button">
-                      <li>
-                        <a href="#" className="text-black  hover:text-primary ">
-                          About Us
+            <ul className="flex flex-col  mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+            {menu.menuItems.nodes.map((menuItem)=>{
+                if(!menuItem.parentId){
+                  return (
+                    // if it has children
+                    (menuItem.childItems.nodes.length > 0 ? (
+                      <li key={menuItem.id} ><a  data-dropdown-toggle="mega-menu-dropdown2" className="flex items-center justify-between w-full py-2 px-3 font-medium text-white border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0" >
+                        {menuItem.label}
+                        <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                        </svg>
                         </a>
-                      </li>
-                    </ul>
-                  </div>
+                        <div id="mega-menu-dropdown2"  className={`absolute z-10 grid hidden  w-auto grid-cols-1 text-sm bg-white border border-gray-100 rounded-lg shadow-md `}> 
+                          <div className="p-4 w-48 pb-0 text-white md:pb-4 ">
+                            <ul className="space-y-4" aria-labelledby="mega-menu-dropdown-button">
+                              {menuItem.childItems.nodes.map((child)=>{
+                                return (
+                                  <li key={child.id}>
+                                    <a href={routeMenu(child)}  target={(menuItem.target ? menuItem.target : '' )}  className="text-black  hover:text-primary ">
+                                      {child.label}
+                                    </a>
+                                  </li>
+                                )
+                              })}
+                              
+                              
+                            </ul>
+                          </div>
+                        </div>
+                        </li>
+                    // ite does't have any children 
+                    ): (
+                    <li key={menuItem.id} ><a href={ routeMenu(menuItem) } target={(menuItem.target ? menuItem.target : '' )} className="block py-2 me-3 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0 " aria-current="page">{menuItem.label}</a></li>
+                    )) 
 
-                  <div className="p-4 pb-0 text-white md:pb-4 ">
-                    <ul className="space-y-4" aria-labelledby="mega-menu-dropdown-button">
-                      <li>
-                        <a href="#" className="text-black  hover:text-primary ">
-                          Blog
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="p-4 pb-0 text-white md:pb-4">
-                    <ul className="space-y-4" aria-labelledby="mega-menu-dropdown-button">
-                      <li>
-                        <a href="#" className="text-black  hover:text-primary ">
-                          Contact Us
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </li>
-              <li>
-                <a href="#" className="block py-2 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-white md:p-0">Team </a>
-              </li>
+                  )//end return 
+                }
+              })}
+              
             </ul>
           </div>
         </div>

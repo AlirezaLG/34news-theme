@@ -3,58 +3,65 @@ import {
   getCategory,
   getPost,
   getPosts,
-  getPageData
+  getPageData,
+  getPostGQL,
+  getDataGQL
 } from "@/lib/functions";
-import { getMetaFromYoast, getMonthAbbreviation,  } from "@/lib/helpers";
+import { sinlgePostGQL, singlePostDataGQL } from '@/lib/wpGraphQL';
+
+import { getMetaFromYoast, getMonthAbbreviation, formatDateTime,route } from "@/lib/helpers";
 import { headers } from "next/headers";
 import { decode } from 'html-entities';
 import ListNews from '@/components/ListNews';
+import RelatedPost from '@/components/RelatedPost';
 
-
-
-
-export async function generateMetadata({ params: { category, slug } }) {
-  const headersList = headers();
-  
-  const pathname = headersList.get("x-url") ?? "";
-  const post = await getPost(slug);
-  return getMetaFromYoast(post?.yoast_head_json, pathname);
+// Dynamic metaData
+export async function generateMetadata( { params: { category, slug, locate } }) {
+  const meta = await  getPostGQL(sinlgePostGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG ));
+  return getMetaFromYoast(meta.data.postBy.seo, meta.data.postBy.link);  
 }
 
-// homePageData?.acf_fields?.single_page_sidebar?.show
-      // ? await getPosts(homePageData?.acf_fields?.single_page_sidebar)
-      // : () => {},
-
 export default async function SinglePage({ params: { category, slug, locate } }) {
-  const homePageData = await getPageData("Home-sharks");
-  const [categoryData, post, sidebar ] = await Promise.all([
-    await getCategory(category),
-    await getPost(slug),
-    await getPosts({
-          posts:
-            homePageData?.acf_fields?.single_page_sidebar?.posts ?? 3,
-          category: homePageData?.acf_fields?.single_page_sidebar?.category,
-        })
+  
+  const SinglePostData = await getPostGQL(sinlgePostGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG ));
+  const post = SinglePostData.data.postBy;
 
-  ]);
-  
-  
+  // add tags widget layout to list the related posts
+  if(SinglePostData.data.pages.edges[0].node.singlePage.related){
+    SinglePostData.data.pages.edges[0].node.singlePage.related.tags = post.tags.nodes.map(node => node.termTaxonomyId);
+  }
+  // console.log(SinglePostData.data.pages.edges[0].node.singlePage.related)
+  // console.log(singlePostDataGQL(SinglePostData.data.pages.edges[0].node.singlePage))
+  const {sidebar, related} = await getDataGQL(singlePostDataGQL(SinglePostData.data.pages.edges[0].node.singlePage))
+  const { sidebar: sidebarWidget, related: relatedWidget }  =  SinglePostData.data.pages.edges[0].node.singlePage;
+   
   return (
     <div  className='container py-5 grid grid-cols-3'>
         <div className="col-span-2">
-          <h1 dangerouslySetInnerHTML={{ __html: decode(post?.title?.rendered) }} ></h1>
+          <h1 dangerouslySetInnerHTML={{ __html: decode(post?.title) }} ></h1>
           <p>
             <i className="ti-calendar"></i>
-            {Intl.DateTimeFormat( locate ,{
-                        year: "2-digit",
-                        month: "short",
-                        day: "2-digit",
-                      }).format(new Date(post.date))}
+            {formatDateTime(post?.date)}
           </p>
-          <div dangerouslySetInnerHTML={{ __html: decode(post?.content?.rendered) }}></div>
+          <div dangerouslySetInnerHTML={{ __html: decode(post?.content) }}></div>
+          <br/>
+          <div className="tags my-3">
+            {
+              post.tags.nodes.map((tag) =>{
+                tag.contentTypeName = "tag";
+                return(
+                 <a  key={tag.termTaxonomyId} href={route(tag, 'tag')} className="bg-[#ccc] p-3 me-3 rounded-md tag text-black hover:text-primary  ">{tag.name}</a> 
+                )
+              })
+            }
+
+          </div>
+
+          <RelatedPost posts={related.nodes}  />
+
         </div>
         <div className="col-span-1">
-          <ListNews posts={sidebar}   />
+          <ListNews  posts={sidebar.nodes} widget={sidebarWidget}  />
         </div>
     </div>
   )

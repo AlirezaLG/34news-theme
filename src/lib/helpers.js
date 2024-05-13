@@ -1,9 +1,10 @@
-const getNavigationUrl = (item) => {
-  switch (item.type) {
-    // case "custom":
-    //   return item.url;
+// const link =  '/post/'+post?.primary_category?.slug + '/' + post?.slug;
+const route = (item, catSlug) => {
+  switch (item.contentTypeName) {
+    case "tag":
+      return `/tags/${item.slug}`;
     case "post":
-      return `/posts/${item?.primary_category?.slug}/${item.slug}`;
+      return `/posts/${catSlug}/${item.slug}`;
     case "page":
       if (item.type_label == "Page") return `/${item.slug}`;
     // case "taxonomy":
@@ -14,13 +15,40 @@ const getNavigationUrl = (item) => {
   }
 };
 
-function getImage(featuredImageSizes, size) {
-  if (!featuredImageSizes || !size) return null;
+const routeMenu = (item) => {
+  const menu = item?.connectedNode?.node;
+  switch (menu?.menutype) {
+    case "Category":
+      return `/posts/${menu.slug}`;
+    case "Post":
+      const category = menu.categories.nodes[0];
+      return `/posts/${category.slug}/${menu.slug}`;
+    case "Page":
+      return `/pages/${menu.slug}`;
+    default:
+      return `${item.url}`;
+  }
+};
 
-  const imageSize = Object.keys(featuredImageSizes).find(
-    (key) => key === size
-  );
-  return imageSize ? featuredImageSizes[imageSize] : null;
+function formatDateTime(dateTimeString) {
+  const now = new Date();
+  const date = new Date(dateTimeString);
+  const diffInMs = now - date;
+  const diffInHours = diffInMs / (1000 * 60 * 60);
+
+  if (diffInHours < 1) {
+    // Less than 1 hour ago
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    return `${diffInMinutes} minutes ago`;
+  } else if (diffInHours < 24) {
+    // Less than 24 hours ago
+    const diffInHoursRounded = Math.floor(diffInHours);
+    return `${diffInHoursRounded} hours ago`;
+  } else {
+    // More than 24 hours ago
+    const options = { day: "numeric", month: "long", year: "numeric" };
+    return date.toLocaleDateString(undefined, options);
+  }
 }
 
 const removeHtmlTags = (inputString) => {
@@ -69,45 +97,37 @@ function getDayOfMonth(dateString) {
   return "";
 }
 
-function getMetaFromYoast(data, pathname) {
+function getMetaFromYoast(data, url) {
   return {
-    title: data?.title,
-    description: data?.description,
-    alternates: { canonical: pathname },
-    robots: {
-      index: data?.robots?.index == "index" ? true : false,
-      follow: data?.robots?.follow == "follow" ? true : false,
-      googleBot: {
-        index: data?.robots?.index == "index" ? true : false,
-        follow: data?.robots?.follow == "follow" ? true : false,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    title: data?.opengraphSiteName,
+    description: data?.metaDesc,
     openGraph: {
-      title: data?.og_title,
-      description: data?.og_description,
-      url: pathname,
-      siteName: data?.og_site_name,
-      images: data?.og_image,
-      locale: data?.og_locale,
-      type: data?.og_type,
+      title: data?.opengraphTitle,
+      description: data?.opengraphDescription,
+      url: url ? url : process.env.NEXT_PUBLIC_APP_URL,
+      siteName: data?.opengraphSiteName,
+      images: {
+        url: data?.opengraphImage?.sourceUrl,
+        width: data?.opengraphImage?.mediaDetails?.width,
+        height: data?.opengraphImage?.mediaDetails?.height,
+      },
+      type: data?.opengraphType,
     },
     twitter: {
-      card: data?.twitter_card,
-      title: data?.og_locale,
-      description: data?.og_description,
-      images: data?.og_image?.map((item) => item.url), // Must be an absolute URL
+      card: "summary_large_image",
+      title: data?.twitterTitle,
+      description: data?.twitterDescription,
+      images: data?.opengraphImage, //data?.og_image?.map((item) => item.url), // Must be an absolute URL
     },
   };
 }
 
 export {
-  getNavigationUrl,
+  route,
   removeHtmlTags,
   getMonthAbbreviation,
   getDayOfMonth,
   getMetaFromYoast,
-  getImage,
+  formatDateTime,
+  routeMenu,
 };

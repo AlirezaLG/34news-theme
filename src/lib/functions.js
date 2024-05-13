@@ -1,5 +1,6 @@
 import { cache } from "react";
-import axios from "./axios";
+import {axios, axiosGQL} from "./axios";
+import  Axios from "axios";
 
 const getFooterSettings = cache(async () => {
   try {
@@ -53,6 +54,9 @@ const mygetPosts = cache(async () => {
     return error+"sharks";
   }
 });
+
+
+
 
 const getPosts = cache(async (config) => {
   try {
@@ -178,6 +182,45 @@ const getPopularTags = cache(async () => {
   }
 });
 
+  
+  // get data with Graph QL 
+  const getHomePageGQL = cache(async (data) => {
+    try {
+      const response = await axiosGQL.post('/', data);
+      return response.data.data.pages.edges[0].node;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  });
+
+  /**
+   * Retrieves widget data using GraphQL.
+   * @param {Object} data - The data to be sent in the GraphQL request.
+   * @returns {Promise<Object|null>} - The response data from the GraphQL request, or null if an error occurs.
+   */
+  const getDataGQL = cache(async (data) => {
+    try {
+      const response = await axiosGQL.post('/', data);
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  });
+
+
+  const getPostGQL = cache(async (data) => {
+    try {
+      const response = await axiosGQL.post('/', data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  });
+
+
 export {
   getFooterSettings,
   getMenu,
@@ -193,4 +236,8 @@ export {
   getTag,
   getChildCategories,
   getPopularTags,
+  getHomePageGQL,
+  getDataGQL,
+  getPostGQL,
 };
+
