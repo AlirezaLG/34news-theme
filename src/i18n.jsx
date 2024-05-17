@@ -24,6 +24,7 @@ export default async function initTranslations(
   await i18nInstance.init({
     lng: locale,
     resources,
+    // debug: true,
     fallbackLng: i18nConfig.defaultLocale,
     supportedLngs: i18nConfig.locales,
     defaultNS: namespaces[0],
@@ -31,7 +32,6 @@ export default async function initTranslations(
     ns: namespaces,
     preload: resources ? [] : i18nConfig.locales,
   });
-  
 
   return {
     i18n: i18nInstance,

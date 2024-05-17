@@ -4,7 +4,7 @@ import { routeMenu } from "@/lib/helpers";
 export default function FooterMenu({ menu }) {
   return (
     <div>
-      <div className="">
+      <div className="footerMenu">
         <h4 className="font-bold text-lg pb-4">{menu.name}</h4>
         <ul className="space-y-2">
           {menu.menuItems.nodes.map((menuItem) => {
@@ -13,6 +13,7 @@ export default function FooterMenu({ menu }) {
             return (
               <li key={menuItem.id}>
                 <Link
+                  className="hover:ms-2 mitem ms-0"
                   href={routeMenu(menuItem)}
                   target={menuItem.target ? menuItem.target : ""}
                 >

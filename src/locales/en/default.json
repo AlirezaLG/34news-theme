@@ -1,5 +1,16 @@
 {
-  "home": "Home",
+  "home": "Home 2",
+  "No posts available":"No posts available",
+  "No social media setup":"No social media setup",
+  "more": "More",
+  "No Title": "No Title",
+  "No date": "No date",
+  "Back Home": "Back Home",
+  "Page not found":"Page not found",
+  "Next Page":"Next Page",
+  "Previous Page":"Previous Page",
+
+
   "links": "Links",
   "usefulLinks": "Useful Links",
   "contact": "Contact",
@@ -8,7 +19,6 @@
   "pageNotFoundMessage": "We’re sorry but we can’t seem to find the page you requested. This might be because you have typed the web address incorrectly.",
   "backToHome": "Back to home",
   "donateNow": "Donate Now",
-  "readMore": "Read More",
   "byName": "By {{name}}",
   "categories": "Categories",
   "recentPosts": "Recent posts",

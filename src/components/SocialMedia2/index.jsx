@@ -1,5 +1,5 @@
+"use client";
 import React from "react";
-
 import {
   FaXTwitter,
   FaFacebook,
@@ -12,21 +12,26 @@ import {
 } from "react-icons/fa6";
 
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
-export default function SocialMedia2({ social3 }) {
-  // console.log("social widget: " + social3);
+export default function SocialMedia2({ socialMedia }) {
+  const { t } = useTranslation();
+  // console.log("social widget: " + socialMedia);
 
   return (
     <div>
       <ul className=" flex flex-row text-white">
-        {social3 ? (
-          Object.entries(social3).map(([platform, link]) => {
+        {socialMedia ? (
+          Object.entries(socialMedia).map(([platform, link]) => {
             if (link.length > 0) {
               return (
                 <React.Fragment key={platform}>
                   {platform === "facebook" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaFacebook />
                       </Link>
                     </li>
@@ -34,7 +39,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "xTwitter" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaXTwitter />
                       </Link>
                     </li>
@@ -42,7 +50,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "youtube" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaYoutube />
                       </Link>
                     </li>
@@ -50,7 +61,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "instagram" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaInstagram />
                       </Link>
                     </li>
@@ -58,7 +72,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "linkedin" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaLinkedin />
                       </Link>
                     </li>
@@ -66,7 +83,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "whatsapp" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaWhatsapp />
                       </Link>
                     </li>
@@ -74,7 +94,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "telegram" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaTelegram />
                       </Link>
                     </li>
@@ -82,7 +105,10 @@ export default function SocialMedia2({ social3 }) {
 
                   {platform === "tiktok" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        className="pt-1 px-1 block hover:text-gray-900"
+                        href={link}
+                      >
                         <FaTiktok />
                       </Link>
                     </li>
@@ -93,7 +119,7 @@ export default function SocialMedia2({ social3 }) {
             return null;
           })
         ) : (
-          <div>No social media setup </div>
+          <div>{t("No social media setup")} </div>
         )}
       </ul>
     </div>

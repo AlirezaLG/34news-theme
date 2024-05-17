@@ -1,6 +1,28 @@
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const limitWords = (content, limit) => {
+  const words = content?.split(/\s+/);
+  if (words?.length <= limit) return content;
+  const limitedWords = words?.slice(0, limit).join(" ");
+  return `${limitedWords}...`;
+};
+
 // const link =  '/post/'+post?.primary_category?.slug + '/' + post?.slug;
 const route = (item, catSlug) => {
-  switch (item.contentTypeName) {
+  switch (item?.contentTypeName) {
     case "tag":
       return `/tags/${item.slug}`;
     case "post":
@@ -11,8 +33,12 @@ const route = (item, catSlug) => {
     //   if (item.type_label == "Category") return `/categories/${item.slug}`;
     //   if (item.type_label == "Tag") return `/tags/${item.slug}`;
     default:
-      return item.url;
+      return item?.url;
   }
+};
+
+const catLinkHome = (item) => {
+  return `/posts/${item.slug}`;
 };
 
 const routeMenu = (item) => {
@@ -46,8 +72,15 @@ function formatDateTime(dateTimeString) {
     return `${diffInHoursRounded} hours ago`;
   } else {
     // More than 24 hours ago
-    const options = { day: "numeric", month: "long", year: "numeric" };
-    return date.toLocaleDateString(undefined, options);
+    const dateObject = new Date(dateTimeString);
+
+    const dateParts = dateTimeString?.split("/");
+    const day = dateObject.getDate();
+    const month = dateObject.getMonth();
+    const year = dateObject.getFullYear();
+    return day + " " + months[month] + ", " + year;
+    // const options = { day: "numeric", month: "long", year: "numeric" };
+    // return date.toLocaleDateString(undefined, options);
   }
 }
 
@@ -61,30 +94,22 @@ const getMonthAbbreviation = (dateString) => {
     const day = parseInt(dateParts[0], 10);
     const month = parseInt(dateParts[1], 10) - 1; // Months in JavaScript are zero-indexed
     const year = parseInt(dateParts[2], 10);
-
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
     const date = new Date(year, month, day);
-
     if (isNaN(date.getTime())) {
       return "Invalid Date";
     }
-
     return months[date.getMonth()];
+  } else {
+    // return currect data for top of website
+    const currentDate = new Date();
+    return (
+      currentDate.getDate() +
+      " " +
+      months[currentDate.getMonth()] +
+      ", " +
+      currentDate.getFullYear()
+    );
   }
-  return "";
 };
 
 function getDayOfMonth(dateString) {
@@ -130,4 +155,6 @@ export {
   getMetaFromYoast,
   formatDateTime,
   routeMenu,
+  limitWords,
+  catLinkHome,
 };

@@ -1,12 +1,16 @@
-import React from 'react'
-import Hcard from '../Hcard'
-export default function Hcards({content}) {
-  return (
-    <div className='space-y-5 py-5'>
-        <Hcard content={content} />
-        <Hcard content={content} />
-        <Hcard content={content} />
-        <Hcard content={content} />
-    </div>
-  )
+"use client";
+import React from "react";
+import Hcard from "../Hcard";
+export default function Hcards({ posts, widget, content }) {
+  return posts?.map((post) => {
+    return (
+      <div className="space-y-5 pb-5" key={post.id}>
+        <Hcard
+          post={post}
+          category={widget?.category?.nodes[0].slug}
+          content={content}
+        />
+      </div>
+    );
+  });
 }

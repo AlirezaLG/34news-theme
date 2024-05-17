@@ -1,3 +1,67 @@
+// load category
+let categoryGQL = (category, ppp, param) => {
+  // Determine cursor based on direction
+  let cursorNext = "";
+  let cursorPrev = "";
+  let firstPP = 0;
+  let prevPP = 0;
+  if (param.p === "next") {
+    cursorNext = param.cursor;
+    firstPP = ppp;
+  } else if (param.p === "prev") {
+    cursorPrev = param.cursor;
+    prevPP = ppp;
+  } else {
+    firstPP = ppp;
+  }
+
+  return JSON.stringify({
+    query: `query category(
+      $after: String = "${cursorNext}", 
+      $before: String = "${cursorPrev}", 
+      $first: Int = ${firstPP}, 
+      $last: Int = ${prevPP}, 
+      $slug: [String] =  "${category}"
+      ) {
+  categories(where: {slug: $slug}) {
+    nodes {
+      name
+      posts(first: $first, after: $after, last: $last , before: $before ) {
+        pageInfo {
+          endCursor
+          hasNextPage
+          startCursor
+          hasPreviousPage
+        }
+        edges {
+          node {
+            id
+            title
+            date
+            link
+            slug
+            contentTypeName
+            featuredImage {
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM]) {
+                    sourceUrl
+                    width
+                    height
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`,
+  });
+};
+
+// load menu
 let menuDataGQL = () => {
   return JSON.stringify({
     query: `query AllMenusAndItems {
@@ -15,6 +79,7 @@ let menuDataGQL = () => {
           instagramLink
           phone
           siteDescription
+          footerDescription
           siteTitle
           techsharks
           telegramLink
@@ -91,6 +156,112 @@ let menuDataGQL = () => {
   });
 };
 
+// single post sidebars data
+let singlePageDataGQL = (data) => {
+  return JSON.stringify({
+    query: `query singlePageWidgetsData(
+        $sidebar_posts: Int = ${data?.sidebar?.posts}, 
+        $sidebar_cid: Int = ${data?.sidebar?.category?.nodes[0]?.termTaxonomyId}, 
+        ) {
+            sidebar: posts(where: {categoryId: $sidebar_cid}, first: $sidebar_posts) {
+                nodes {
+                  id
+                  title
+                  slug
+                  contentTypeName
+                  date
+                  excerpt
+                  featuredImage {
+                  node {
+                      mediaDetails {
+                      sizes(include: [THUMBNAIL]) {
+                          sourceUrl
+                          width
+                          height
+                          name
+                      }
+                      }
+                  }
+                  }
+                }
+            }  #end sidebar
+         }`,
+  });
+};
+
+// single Page data only
+let sinlgePageGQL = (home_slug) => {
+  return JSON.stringify({
+    query: `query page( $home_slug: String = "${home_slug}") {
+      customizer {
+        facebookLink
+        linkedinLink
+        instagramLink
+        telegramLink
+        tiktokLink
+        whatsappLink
+        xTwitterLink
+        youtubeLink
+      }  
+      pages(where: {name: $home_slug}) {
+            edges {
+              node {
+                title
+                date
+                link
+                slug
+                contentTypeName
+                content
+                defaultPage {
+                  sidebar {
+                    title
+                    posts
+                    category {
+                      nodes {
+                        termTaxonomyId
+                        name
+                        slug
+                      }
+                    }
+                  }
+                }
+                seo {
+                  canonical
+                  opengraphSiteName
+                  metaDesc
+                  metaKeywords
+                  opengraphDescription
+                  opengraphTitle
+                  opengraphType
+                  opengraphUrl
+                  title
+                  twitterDescription
+                  twitterTitle
+                  twitterImage {
+                    id
+                    sourceUrl
+                    mediaDetails {
+                      height
+                      width
+                    }
+                    status
+                  }
+                  opengraphImage {
+                    sourceUrl
+                    mediaDetails {
+                      height
+                      width
+                    }
+                  }
+                }
+              }
+            }
+          }
+      }`,
+  });
+};
+
+// single post sidebars data
 let singlePostDataGQL = (data) => {
   return JSON.stringify({
     query: `query singleWidgetsData(
@@ -99,6 +270,7 @@ let singlePostDataGQL = (data) => {
         $related_posts: Int = ${data?.related?.posts}, 
         $related_tags: [ID] = [${data?.related?.tags}]
         ) {
+          
             related: posts(first: $related_posts, where: {tagIn: $related_tags }) {
                 nodes {
                   id
@@ -158,11 +330,21 @@ let singlePostDataGQL = (data) => {
 let sinlgePostGQL = (slug, home_slug) => {
   return JSON.stringify({
     query: `query post( $slug: String = "${slug}", $home_slug: String = "${home_slug}") {
-        pages(where: {name: $home_slug}) {
+      customizer {
+        facebookLink
+        linkedinLink
+        instagramLink
+        telegramLink
+        tiktokLink
+        whatsappLink
+        xTwitterLink
+        youtubeLink
+      }  
+      pages(where: {name: $home_slug}) {
             edges {
               node {
                 title
-                singlePage {
+                singlePost {
                   sidebar {
                     title
                     posts
@@ -170,6 +352,7 @@ let sinlgePostGQL = (slug, home_slug) => {
                       nodes {
                         termTaxonomyId
                         name
+                        slug
                       }
                     }
                   }
@@ -185,6 +368,8 @@ let sinlgePostGQL = (slug, home_slug) => {
           title
           date
           link
+          slug
+          contentTypeName
           content
           tags {
             nodes {
@@ -246,6 +431,7 @@ let sinlgePostGQL = (slug, home_slug) => {
   });
 };
 
+// Home page All widgets data
 let homePageDataGQL = (data) => {
   return JSON.stringify({
     query: `query widgetsData(
@@ -309,7 +495,6 @@ let homePageDataGQL = (data) => {
                   contentTypeName
                   date
                   excerpt
-                  content
                   featuredImage {
                   node {
                       mediaDetails {
@@ -334,7 +519,7 @@ let homePageDataGQL = (data) => {
                   featuredImage {
                   node {
                       mediaDetails {
-                      sizes(include: MEDIUM) {
+                      sizes(include: THUMBNAIL) {
                           sourceUrl
                           width
                           height
@@ -352,6 +537,9 @@ let homePageDataGQL = (data) => {
                   slug
                   contentTypeName
                   date
+                  videoLinkGroup{
+                    videoLink
+                  }
                   videoLinkGroup {
                       videoLink
                     }
@@ -378,6 +566,9 @@ let homePageDataGQL = (data) => {
                   slug
                   contentTypeName
                   date
+                  videoLinkGroup{
+                    videoLink
+                  }
                   videoLinkGroup {
                       videoLink
                     }
@@ -401,6 +592,9 @@ let homePageDataGQL = (data) => {
                   title
                   slug
                   contentTypeName
+                  videoLinkGroup{
+                    videoLink
+                  }
                   date
                   videoLinkGroup {
                       videoLink
@@ -452,7 +646,7 @@ let homePageDataGQL = (data) => {
                   featuredImage {
                   node {
                       mediaDetails {
-                      sizes(include: THUMBNAIL) {
+                      sizes(include: MEDIUM) {
                           sourceUrl
                           width
                           height
@@ -472,6 +666,16 @@ let homePageDataGQL = (data) => {
 let homePageGQL = (data) => {
   return JSON.stringify({
     query: `query homePage ( $home_slug: String = "${data}" ) {
+        customizer {
+          facebookLink
+          linkedinLink
+          instagramLink
+          telegramLink
+          tiktokLink
+          whatsappLink
+          xTwitterLink
+          youtubeLink
+        }
         pages(where: {name: $home_slug}) {
           edges {
             node {
@@ -531,6 +735,7 @@ let homePageGQL = (data) => {
                   }
                 }
                 video {
+                  show
                   col1 {
                     title
                     posts
@@ -635,6 +840,9 @@ export {
   homePageGQL,
   homePageDataGQL,
   sinlgePostGQL,
+  sinlgePageGQL,
   singlePostDataGQL,
+  singlePageDataGQL,
   menuDataGQL,
+  categoryGQL,
 };
