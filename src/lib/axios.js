@@ -3,32 +3,25 @@ import Axios from "axios";
 import https from "https";
 // const config = getConfig();
 
-
-
 let axiosGQL;
-  axiosGQL = Axios.create({
-  method: 'post',
+axiosGQL = Axios.create({
+  method: "post",
   maxBodyLength: Infinity,
-  baseURL: "http://localhost:8888/wordpress/graphql/",
-  headers: { 
-    'Content-Type': 'application/json'
-  }
-  
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-// REST API URL 
+// REST API URL
 let axios;
-  axios = Axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
-    headers: {},
-    withCredentials: true,
-    httpsAgent: new https.Agent({
-      rejectUnauthorized: false,
-    }),
-  });
+axios = Axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
+  headers: {},
+  withCredentials: true,
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false,
+  }),
+});
 
-
-export {
-  axios,
-  axiosGQL
-};
+export { axios, axiosGQL };

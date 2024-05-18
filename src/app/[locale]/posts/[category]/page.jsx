@@ -16,7 +16,7 @@ export default async function CategoryPage({
 
   const pageInfo = categoryData.data.categories.nodes[0].posts.pageInfo;
   const posts = categoryData.data.categories.nodes[0].posts.edges;
-  console.log(posts);
+  // console.log(posts);
   // Parse page number from searchParams
   const currentPage = parseInt(searchParams.page || 1);
   // const cursor = searchParams.cursor || "";
