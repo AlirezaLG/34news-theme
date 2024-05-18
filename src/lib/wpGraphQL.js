@@ -94,7 +94,7 @@ let menuDataGQL = () => {
             name
             slug
             locations
-            menuItems {
+            menuItems(first: 100) {
             nodes {
                 id
                 label
@@ -109,7 +109,7 @@ let menuDataGQL = () => {
                     ...category
                 }
                 }
-                childItems {
+                childItems(first: 100) {
                 nodes {
                     id
                     label

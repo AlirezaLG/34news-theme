@@ -20,7 +20,7 @@ export default function NavigationMenu({menu}) {
             </button>
           </div>
           <div id="mega-menu" className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" >
-            <ul className="flex flex-col  mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+            <ul className="flex flex-col  mt-4 font-medium md:flex-row md:mt-0 md:space-x-0 rtl:space-x-reverse">
             {menu.menuItems.nodes.map((menuItem)=>{
                 if(!menuItem.parentId){
                   return (
@@ -52,7 +52,7 @@ export default function NavigationMenu({menu}) {
                         </li>
                     // ite does't have any children 
                     ): (
-                    <li key={menuItem.id} ><a href={ routeMenu(menuItem) } target={(menuItem.target ? menuItem.target : '' )} className="block py-2 me-3 px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-white  md:border-0 md:hover:text-primary md:py-3  " aria-current="page">{menuItem.label}</a></li>
+                    <li key={menuItem.id} ><a href={ routeMenu(menuItem) } target={(menuItem.target ? menuItem.target : '' )} className="block py-2  px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-white  md:border-0 md:hover:text-primary md:py-3  " aria-current="page">{menuItem.label}</a></li>
                     )) 
 
                   )//end return 

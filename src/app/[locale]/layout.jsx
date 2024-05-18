@@ -60,7 +60,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
     FOOTER_2: footerMenu2,
     FOOTER_3: footerMenu3,
   } = menusByName;
-
+  console.log(primaryMenu.menuItems.nodes);
   return (
     <html>
       <body>
