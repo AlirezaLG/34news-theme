@@ -15,7 +15,9 @@ export async function generateMetadata({ params: { category, slug, locate } }) {
   const meta = await getPostGQL(
     sinlgePostGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
   );
-  return getMetaFromYoast(meta.data.postBy.seo, meta.data.postBy.link);
+  const url =
+    process.env.NEXT_PUBLIC_APP_URL + "/posts/" + category + "/" + slug;
+  return getMetaFromYoast(meta.data.postBy.seo, url);
 }
 
 export default async function SinglePost({

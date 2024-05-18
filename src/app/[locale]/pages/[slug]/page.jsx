@@ -15,11 +15,8 @@ export async function generateMetadata({ params: { slug, locate } }) {
     sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
   );
 
-  // we send seo address + page url
-  return getMetaFromYoast(
-    meta?.data?.pages?.edges[0].node?.seo,
-    meta?.data?.pages?.edges[0].node?.link
-  );
+  const url = process.env.NEXT_PUBLIC_APP_URL + "/pages/" + slug;
+  return getMetaFromYoast(meta?.data?.pages?.edges[0].node?.seo, url);
 }
 
 export default async function SinglePost({ params: { slug, locale } }) {
