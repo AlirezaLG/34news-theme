@@ -11,7 +11,7 @@ export default function ({
   socialmedia,
   footer,
 }) {
-  // console.log(footer);
+  console.log(footer);
   return (
     <div className="bg-primary pt-5">
       <div className="container py-10 text-white grid md:grid-cols-2 gap-5 xs:grid-cols-1">
@@ -26,7 +26,7 @@ export default function ({
                 src={footer.footerLogo ? footer.footerLogo : "/logo.png"}
                 alt={footer.siteTitle}
               />
-              <h3 className="ms-3 text-xl font-bold">{footer.siteTitle}</h3>
+              <h3 className="ms-3 text-xl font-bold">{footer.slogun}</h3>
             </div>
             <p className="py-5">{footer.footerDescription}</p>
             <SocialMedia2 socialMedia={socialmedia} />

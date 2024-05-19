@@ -81,6 +81,7 @@ let menuDataGQL = () => {
           siteDescription
           footerDescription
           siteTitle
+          slogun
           techsharks
           telegramLink
           tiktokLink
