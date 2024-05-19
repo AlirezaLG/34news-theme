@@ -11,7 +11,7 @@ export default function ({
   socialmedia,
   footer,
 }) {
-  console.log(footer);
+  // console.log(footer);
   return (
     <div className="bg-primary pt-5">
       <div className="container py-10 text-white grid md:grid-cols-2 gap-5 xs:grid-cols-1">

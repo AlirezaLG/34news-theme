@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 export default function PostTitleBlack({ title, href, style }) {
-  console.log(style.titleStyle);
+  // console.log(style.titleStyle);
   const { t } = useTranslation();
   return (
     <div className=" border-b border-gray-50/25  px-1 pb-2 mb-5">

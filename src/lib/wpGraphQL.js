@@ -81,7 +81,6 @@ let menuDataGQL = () => {
           siteDescription
           footerDescription
           siteTitle
-          slogun
           techsharks
           telegramLink
           tiktokLink
@@ -118,6 +117,23 @@ let menuDataGQL = () => {
                     target
                     order
                     parentId
+                    childItems(first: 100) {
+                      nodes {
+                        id
+                        label
+                        url
+                        target
+                        order
+                        parentId
+                        connectedNode {
+                          node {
+                              ...post
+                              ...page
+                              ...category
+                          }
+                          }
+                      }
+                    }
                     connectedNode {
                     node {
                         ...post
@@ -271,7 +287,6 @@ let singlePostDataGQL = (data) => {
         $related_posts: Int = ${data?.related?.posts}, 
         $related_tags: [ID] = [${data?.related?.tags}]
         ) {
-          
             related: posts(first: $related_posts, where: {tagIn: $related_tags }) {
                 nodes {
                   id
