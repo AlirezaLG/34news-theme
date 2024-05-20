@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const flowbite = require("flowbite-react/tailwind");
+// const flowbite = require("flowbite-react/tailwind");
 
 module.exports = {
   // purge: [
@@ -18,28 +18,26 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'xs': '320px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      xs: "320px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
     },
     container: {
       center: true,
       screens: {
-        xs: '100%',
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
+        xs: "100%",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
       },
     },
     extend: {
-      
       colors: {
         primary: "#2865D2",
         secondary: "#f00",
-        
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -48,7 +46,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("flowbite/plugin")
-]
+  plugins: [require("flowbite/plugin")],
 };
