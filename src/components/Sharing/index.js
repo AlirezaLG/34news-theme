@@ -1,11 +1,21 @@
 "use client";
 import React from "react";
 import {
+  EmailShareButton,
   FacebookShareButton,
-  FacebookIcon,
+  LinkedinShareButton,
   TwitterShareButton,
-  TwitterIcon,
-} from "next-share";
+  TelegramShareButton,
+  WhatsappShareButton,
+} from "react-share";
+import {
+  FacebookIcon,
+  XIcon,
+  TelegramIcon,
+  WhatsappIcon,
+  LinkedinIcon,
+  EmailIcon,
+} from "react-share";
 import { useTranslation } from "react-i18next";
 
 export default function Sharing({ post, category = null }) {
@@ -31,8 +41,32 @@ export default function Sharing({ post, category = null }) {
 
         <li className="float-none">
           <TwitterShareButton url={url} title={post?.title}>
-            <TwitterIcon size={32} round />
+            <XIcon size={32} round />
           </TwitterShareButton>
+        </li>
+
+        <li className="float-none">
+          <LinkedinShareButton url={url} title={post?.title}>
+            <LinkedinIcon size={32} round />
+          </LinkedinShareButton>
+        </li>
+
+        <li className="float-none">
+          <EmailShareButton url={url} title={post?.title}>
+            <EmailIcon size={32} round />
+          </EmailShareButton>
+        </li>
+
+        <li className="float-none">
+          <TelegramShareButton url={url} title={post?.title}>
+            <TelegramIcon size={32} round />
+          </TelegramShareButton>
+        </li>
+
+        <li className="float-none">
+          <WhatsappShareButton url={url} title={post?.title}>
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
         </li>
       </ul>
     </div>

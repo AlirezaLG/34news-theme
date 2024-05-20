@@ -174,7 +174,7 @@ export default function NavigationMenu({ menu ,header}) {
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                             {/* second level menu */}
                             {menuItem.childItems.nodes.map((child) => {
-                              console.log(child);
+                              
                               return child.childItems.nodes.length > 0 ? (
                                 <li key={child.id} data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class=" subdropdownButton flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >
                                   {child.label}

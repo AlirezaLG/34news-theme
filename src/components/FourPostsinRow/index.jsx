@@ -15,7 +15,7 @@ export default function FourPostinRow({ posts, widget }) {
                 style=""
                 category={widget?.category?.nodes[0].slug}
                 content={false}
-                imgsize={0}
+                imgsize={1}
               />
             </div>
           );

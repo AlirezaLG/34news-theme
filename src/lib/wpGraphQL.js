@@ -385,6 +385,15 @@ let sinlgePostGQL = (slug, home_slug) => {
           date
           link
           slug
+          videoLinkGroup{
+            videoLink
+          }
+          postFormats {
+            nodes {
+              name
+              slug
+            }
+          }
           contentTypeName
           content
           tags {
@@ -405,7 +414,7 @@ let sinlgePostGQL = (slug, home_slug) => {
           featuredImage {
             node {
               mediaDetails {
-                sizes(include: [MEDIUM_LARGE]) {
+                sizes(include: [MEDIUM_LARGE, MEDIUM]) {
                   sourceUrl
                   width
                   height
@@ -556,9 +565,6 @@ let homePageDataGQL = (data) => {
                   videoLinkGroup{
                     videoLink
                   }
-                  videoLinkGroup {
-                      videoLink
-                    }
                   featuredImage {
                   node {
                       mediaDetails {
@@ -582,9 +588,6 @@ let homePageDataGQL = (data) => {
                   slug
                   contentTypeName
                   date
-                  videoLinkGroup{
-                    videoLink
-                  }
                   videoLinkGroup {
                       videoLink
                     }
@@ -608,9 +611,6 @@ let homePageDataGQL = (data) => {
                   title
                   slug
                   contentTypeName
-                  videoLinkGroup{
-                    videoLink
-                  }
                   date
                   videoLinkGroup {
                       videoLink
