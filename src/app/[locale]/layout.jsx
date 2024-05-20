@@ -1,5 +1,6 @@
 import "@/assets/css/globals.css";
 import "@/assets/css/style.css";
+import { Noticia_Text } from "@next/font/google";
 
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -9,6 +10,11 @@ import CprogressBar from "@/components/CprogressBar";
 import { menuDataGQL } from "@/lib/wpGraphQL";
 import { getDataGQL } from "@/lib/functions";
 import TranslationsProvider from "@/providers/TranslationsProvider";
+
+const roboto = Noticia_Text({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 const RootLayout = async ({ params: { locale }, children }) => {
   const { t, resources } = await initTranslations(locale);
@@ -64,7 +70,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
   // console.log(primaryMenu.menuItems.nodes);
   return (
     <html>
-      <body>
+      <body className={roboto.className}>
         <TranslationsProvider
           namespaces={["default"]}
           locale={locale}

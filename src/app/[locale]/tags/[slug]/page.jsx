@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function TagCategory() {
-  return (
-    <div>TagCategory</div>
-  )
+  return <div>TagCategory</div>;
 }

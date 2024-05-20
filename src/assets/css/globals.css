@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 /* @import 'nprogress/nprogress.css'; */
+/* @import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap'); */
+
 
 *{
-  font-family: "Inter", sans-serif;
+  /* font-family: "Noticia Text", sans-serif; */
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings:
@@ -20,7 +22,7 @@ a,h1,h2,h3,h4,h5,h6 { transition: all 0.3s;}
   @apply text-primary
 }
 .single .content p{
-  @apply mb-3
+  @apply mb-4
 }
 .single .content em{
   @apply italic

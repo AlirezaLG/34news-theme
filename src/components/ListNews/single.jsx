@@ -14,7 +14,7 @@ export default function single({ post, category }) {
       >
         <FaCaretRight className="mt-1 me-1" />
         <Link href={route(post, category) || ""}>
-          <h4 className="text-start text-lg text-base text-black hover:text-primary ">
+          <h4 className="text-start text-lg font-bold  text-black hover:text-primary ">
             {post?.title}
           </h4>
           <PostDate date={post?.date} />

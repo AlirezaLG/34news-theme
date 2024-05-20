@@ -12,7 +12,7 @@ export default function RelatedPost({ posts, widget }) {
             <div key={post.id}>
               <Card1
                 post={post}
-                style="text-md"
+                style="text-md font-bold"
                 category={post.categories.nodes[0].slug}
               />
             </div>

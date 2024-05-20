@@ -23,11 +23,6 @@ export async function generateMetadata({ params: { category, slug, locate } }) {
   return getMetaFromYoast(meta.data.postBy.seo, url);
 }
 
-// post-format-aside
-// post-format-video
-// post-format-audio
-// post-format-status
-// []
 export default async function SinglePost({
   params: { category, slug, locale },
 }) {
@@ -94,7 +89,7 @@ export default async function SinglePost({
         >
           {isEmptyDefault && <MImage post={post} imgsize={1} imgClass="mb-4" />}
           <h1
-            className="text-4xl "
+            className="text-4xl font-bold"
             dangerouslySetInnerHTML={{ __html: decode(post?.title) }}
           ></h1>
           {/* {post.videoLinkGroup.videoLink} */}
@@ -103,7 +98,7 @@ export default async function SinglePost({
             {formatDateTime(post?.date)}
           </p>
           <div
-            className="leading-6 content"
+            className="leading-8 font-normal text-xl content"
             dangerouslySetInnerHTML={{ __html: decode(post?.content) }}
           ></div>
           <br />
