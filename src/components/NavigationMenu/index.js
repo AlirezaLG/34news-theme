@@ -3,6 +3,7 @@ import { routeMenu } from "@/lib/helpers";
 import React, { useEffect } from "react";
 import { Dropdown } from "flowbite";
 import { Drawer } from "flowbite";
+import SearchMenu from "../SearchMenu";
 
 export default function NavigationMenu({ menu ,header}) {
   // console.log(menu);
@@ -71,16 +72,9 @@ export default function NavigationMenu({ menu ,header}) {
   return (
     <div className="w-100 bg-primary">
       <nav className="container">
-        <div className="flex flex-wrap items-start  max-w-screen-xl me-auto ">
+        <div className="flex flex-wrap items-start  max-w-screen-xl  ">
 
-          <div className="xs:ms-auto md:ms-0 ps-0 pe-3">
-            <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
-              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14" >
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-              </svg>
-            </button>
-          </div>
-
+          
           {/* mobile only drawer */}
           <div id="drawer-navigation" class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label" >
             <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"  >
@@ -158,7 +152,7 @@ export default function NavigationMenu({ menu ,header}) {
           </div>
 
           {/* desktop only  */}
-          <div id="mega-menu" className="xs:hidden items-center justify-between hidden w-full md:flex md:w-auto md:order-1" >
+          <div id="mega-menu" className="xs:hidden items-center justify-between hidden w-full md:flex md:w-auto " >
             <ul className="flex flex-col  mt-4 font-medium md:flex-row md:mt-0 md:space-x-0 rtl:space-x-reverse">
               {menu.menuItems.nodes.map((menuItem) => {
                 if (!menuItem.parentId) {
@@ -228,6 +222,16 @@ export default function NavigationMenu({ menu ,header}) {
               })}
             </ul>
           </div>
+          <SearchMenu />
+          <div className="xs:ms-auto md:ms-0 ps-0 pe-3">
+            <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
+              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14" >
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+              </svg>
+            </button>
+          </div>
+
+          
         </div>
       </nav>
     </div>

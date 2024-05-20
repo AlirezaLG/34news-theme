@@ -21,6 +21,7 @@ const HomePage = async ({ params: { locale } }) => {
   const gql = await getHomePageGQL(
     homePageGQL(process.env.NEXT_PUBLIC_HOME_SLUG)
   );
+
   const query = gql?.pages?.edges[0].node;
 
   // console.log(gql.customizer);
@@ -47,6 +48,7 @@ const HomePage = async ({ params: { locale } }) => {
     video3,
     threeCols,
     oneCols,
+    oneCols2,
   } = await getDataGQL(homePageDataGQL(query?.homepage));
 
   return (
@@ -93,6 +95,8 @@ const HomePage = async ({ params: { locale } }) => {
 
       {/* last widget */}
       <OneCol posts={oneCols?.nodes} widget={query?.homepage?.oneCols} />
+
+      <OneCol posts={oneCols2?.nodes} widget={query?.homepage?.oneCols2} />
     </main>
   );
 };

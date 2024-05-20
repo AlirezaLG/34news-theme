@@ -10,7 +10,7 @@ export default function TwoCols({
 }) {
   return (
     <div className="container">
-      <div className="grid md:grid-cols-3 gap-5">
+      <div className="grid md:grid-cols-3 gap-5 my-5 mb-8">
         <div className="md:col-span-2 xs:col-span-3">
           <PostTitle
             title={widgetTwoCols?.title}
@@ -24,7 +24,7 @@ export default function TwoCols({
           <PostTitle
             title={widgetTwoColsRight?.title}
             href={catLinkHome(widgetTwoColsRight?.category.nodes[0])}
-            size={"text-xl"}
+            size={"text-2xl"}
             more={false}
           />
           <Hcards

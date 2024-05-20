@@ -25,6 +25,7 @@ export async function generateMetadata({ params: { category, slug, locate } }) {
 // post-format-aside
 // post-format-video
 // post-format-audio
+// post-format-status
 // []
 export default async function SinglePost({
   params: { category, slug, locale },
@@ -62,14 +63,15 @@ export default async function SinglePost({
   const isEmptyDefault = !(post?.postFormats?.nodes?.length > 0);
   const tags = post.tags.nodes.length > 0;
   const videoId = post?.videoLinkGroup?.videoLink?.split("v=")[1].split("&")[0];
-
+  const fullW =
+    post?.postFormats?.nodes?.[0]?.slug === "post-format-status" || null;
   return (
     <React.Fragment>
       {post?.postFormats?.nodes?.[0]?.slug === "post-format-video" && (
-        <div className="bg-black md:h-[34rem] xs:h-32">
+        <div className="bg-black md:h-[34rem] xs:h-64">
           <div className="text-white container ">
             <iframe
-              className="w-full px-32 h-[34rem]"
+              className="w-full md:px-32 md:h-[34rem] xs:h-64"
               src={`https://www.youtube.com/embed/${videoId}`}
               title="YouTube video player"
               frameborder="0"
@@ -80,8 +82,13 @@ export default async function SinglePost({
           </div>
         </div>
       )}
+
       <div className="container single py-8 grid grid-cols-3 gap-5">
-        <div className="col-span-2">
+        <div
+          className={` ${
+            fullW ? "col-span-3 md:mx-52 " : "md:col-span-2 xs:col-span-3"
+          } `}
+        >
           {isEmptyDefault && <MImage post={post} imgsize={1} imgClass="mb-4" />}
           <h1
             className="text-4xl "
@@ -119,7 +126,11 @@ export default async function SinglePost({
           <PostTitle title={relatedWidget?.title} size={"text-lg"} />
           <RelatedPost posts={related.nodes} widget={relatedWidget} />
         </div>
-        <div className="col-span-1 ps-8">
+        <div
+          className={` ${
+            fullW ? "hidden" : "md:col-span-1 xs:col-span-3 ps-8"
+          } `}
+        >
           <ListNews posts={sidebar.nodes} widget={sidebarWidget} />
           <SocialMedia socialMedia={socialMedia} />
         </div>

@@ -1,4 +1,61 @@
-// load category
+// Search post
+let searchGQL = (search, ppp, param) => {
+  // Determine cursor based on direction
+  let cursorNext = "";
+  let cursorPrev = "";
+  let firstPP = 0;
+  let prevPP = 0;
+  if (param.p === "next") {
+    cursorNext = param.cursor;
+    firstPP = ppp;
+  } else if (param.p === "prev") {
+    cursorPrev = param.cursor;
+    prevPP = ppp;
+  } else {
+    firstPP = ppp;
+  }
+
+  return JSON.stringify({
+    query: `query search(
+      $after: String = "${cursorNext}", 
+      $before: String = "${cursorPrev}", 
+      $first: Int = ${firstPP}, 
+      $last: Int = ${prevPP}, 
+      $search: String = "${search}"
+      ) {
+        posts(where: {search: $search }, first: $first, after: $after, last: $last , before: $before) {
+          pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+          }
+          edges {
+            node {
+              id
+              title
+              date
+              link
+              slug
+              contentTypeName
+              featuredImage {
+                node {
+                  mediaDetails {
+                    sizes(include: [MEDIUM]) {
+                      sourceUrl
+                      width
+                      height
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+}`,
+  });
+};
+
 let categoryGQL = (category, ppp, param) => {
   // Determine cursor based on direction
   let cursorNext = "";
@@ -477,7 +534,9 @@ let homePageDataGQL = (data) => {
         $threeCols_posts: Int = ${data?.threeCols?.posts}, 
         $threeCols_cid: Int = ${data?.threeCols?.category?.nodes[0]?.termTaxonomyId},
         $oneCols_posts: Int = ${data?.oneCols?.posts}, 
-        $oneCols_cid: Int = ${data?.oneCols?.category?.nodes[0]?.termTaxonomyId}
+        $oneCols_cid: Int = ${data?.oneCols?.category?.nodes[0]?.termTaxonomyId},
+        $oneCols2_posts: Int = ${data?.oneCols2?.posts}, 
+        $oneCols2_cid: Int = ${data?.oneCols2?.category?.nodes[0]?.termTaxonomyId}
         
         ) {
             slideshow: posts(where: {categoryId: $slideshow_cid}, first: $slideshow_posts) {
@@ -491,7 +550,7 @@ let homePageDataGQL = (data) => {
                   featuredImage {
                   node {
                       mediaDetails {
-                      sizes(include: [MEDIUM_LARGE, MEDIUM]) {
+                      sizes(include: [MEDIUM]) {
                           sourceUrl
                           width
                           height
@@ -673,6 +732,27 @@ let homePageDataGQL = (data) => {
                   }
                 }
               }
+              oneCols2: posts(where: {categoryId: $oneCols2_cid}, first: $oneCols2_posts) {
+                nodes {
+                id
+                title
+                slug
+                contentTypeName
+                date
+                featuredImage {
+                node {
+                    mediaDetails {
+                    sizes(include: MEDIUM) {
+                        sourceUrl
+                        width
+                        height
+                        name
+                    }
+                    }
+                }
+                }
+              }
+            }
       }`,
     variables: {},
   });
@@ -812,6 +892,19 @@ let homePageGQL = (data) => {
                     }
                   }
                 }
+                oneCols2 {
+                  title
+                  more
+                  posts
+                  show
+                  category {
+                    nodes {
+                      termTaxonomyId
+                      slug
+                      name
+                    }
+                  }
+                }
                 
               }
               seo {
@@ -861,4 +954,5 @@ export {
   singlePageDataGQL,
   menuDataGQL,
   categoryGQL,
+  searchGQL,
 };

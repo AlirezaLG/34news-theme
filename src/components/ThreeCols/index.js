@@ -7,14 +7,14 @@ import Single from "../ListNews/single";
 
 export default function ThreeCols({ posts, widget }) {
   return (
-    <div className="container my-14">
+    <div className="container mt-14 mb-3">
       <PostTitle
         title={widget?.title}
         href={catLinkHome(widget?.category.nodes[0])}
         size={"text-2xl"}
         more={true}
       />
-      <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0 py-5">
+      <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0 pb-5">
         {/* fist col */}
         {posts.map((post, index) => {
           if (index < 1) {

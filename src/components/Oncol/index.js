@@ -12,7 +12,7 @@ export default function OneCol({ posts, widget }) {
         size={"text-xl"}
         more={true}
       />
-      <div className="grid md:grid-cols-4 xs:grid-cols-1 md:gap-5 xs:gap-0 py-5">
+      <div className="grid md:grid-cols-4 xs:grid-cols-1 md:gap-5 xs:gap-0 pb-5">
         {posts.map((post) => {
           return (
             <React.Fragment key={post.id}>
