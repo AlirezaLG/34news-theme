@@ -11,6 +11,7 @@ import Sharing from "@/components/Sharing";
 import SocialMedia from "@/components/SocialMedia";
 import MImage from "@/components/MImage";
 import { setDefaultNamespace } from "i18next";
+import AuthorBox from "@/components/AuthorBox";
 
 // Dynamic metaData
 export async function generateMetadata({ params: { category, slug, locate } }) {
@@ -65,6 +66,8 @@ export default async function SinglePost({
   const videoId = post?.videoLinkGroup?.videoLink?.split("v=")[1].split("&")[0];
   const fullW =
     post?.postFormats?.nodes?.[0]?.slug === "post-format-status" || null;
+
+  console.log(post);
   return (
     <React.Fragment>
       {post?.postFormats?.nodes?.[0]?.slug === "post-format-video" && (
@@ -103,6 +106,11 @@ export default async function SinglePost({
             className="leading-6 content"
             dangerouslySetInnerHTML={{ __html: decode(post?.content) }}
           ></div>
+          <br />
+          {post?.single?.showAuthor && (
+            <AuthorBox author={post?.author?.node} />
+          )}
+
           <br />
 
           <Sharing post={post} category={category} />

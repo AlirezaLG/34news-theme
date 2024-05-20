@@ -442,6 +442,25 @@ let sinlgePostGQL = (slug, home_slug) => {
           date
           link
           slug
+          single {
+            showAuthor
+          }
+          author {
+            node {
+              id
+              name
+              email
+              description
+              authorImage {
+                authortitle
+                authorImage {
+                  node {
+                    mediaItemUrl
+                  }
+                }
+              }
+            }
+          }
           videoLinkGroup{
             videoLink
           }
