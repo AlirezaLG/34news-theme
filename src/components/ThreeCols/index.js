@@ -7,7 +7,7 @@ import Single from "../ListNews/single";
 
 export default function ThreeCols({ posts, widget }) {
   return (
-    <div className="container mt-14 mb-3">
+    <div className="container mt-10 mb-3">
       <PostTitle
         title={widget?.title}
         href={catLinkHome(widget?.category.nodes[0])}
@@ -53,7 +53,7 @@ export default function ThreeCols({ posts, widget }) {
         </div>
 
         {/* third cal */}
-        <div>
+        <div className="mt-5">
           {posts.map((post, index) => {
             if (index > 4) {
               return (

@@ -23,7 +23,7 @@ export default function BigImage({ posts, category }) {
               className="grid md:grid-cols-2 xs:grid-cols-1 mt-2"
               key={post.id}
             >
-              <div className="py-4 px-2">
+              <div className="py-4 px-2 xs:order-2 md:order-1">
                 <Link href={route(post, cat) || ""}>
                   <h2 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 hover:text-primary">
                     {decode(post?.title)}
@@ -35,7 +35,10 @@ export default function BigImage({ posts, category }) {
                 </p>
                 <PostDate date={post?.date} />
               </div>
-              <a className="col-span-1" href={route(post, cat) || ""}>
+              <a
+                className="col-span-1 xs:order-1 md:order-2"
+                href={route(post, cat) || ""}
+              >
                 <MImage post={post} imgsize={0} />
               </a>
             </div>

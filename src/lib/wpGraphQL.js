@@ -1,3 +1,59 @@
+let tagGQL = (tag, ppp, param) => {
+  // Determine cursor based on direction
+  let cursorNext = "";
+  let cursorPrev = "";
+  let firstPP = 0;
+  let prevPP = 0;
+  if (param.p === "next") {
+    cursorNext = param.cursor;
+    firstPP = ppp;
+  } else if (param.p === "prev") {
+    cursorPrev = param.cursor;
+    prevPP = ppp;
+  } else {
+    firstPP = ppp;
+  }
+
+  return JSON.stringify({
+    query: `query search(
+      $after: String = "${cursorNext}", 
+      $before: String = "${cursorPrev}", 
+      $first: Int = ${firstPP}, 
+      $last: Int = ${prevPP}, 
+      $tag: String = "${tag}"
+      ) {
+        posts(where: {tag: $tag }, first: $first, after: $after, last: $last , before: $before) {
+          pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+          }
+          nodes {
+            id
+            title
+            date
+            link
+            slug
+            contentTypeName
+            featuredImage {
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM]) {
+                    sourceUrl
+                    width
+                    height
+                  }
+                }
+              }
+            }
+          }
+          
+        }
+    }`,
+  });
+};
+
 // Search post
 let searchGQL = (search, ppp, param) => {
   // Determine cursor based on direction
@@ -127,6 +183,7 @@ let menuDataGQL = () => {
           siteUrl
           description
           email
+          slogun
           displayDate
           facebookLink
           footerLogo
@@ -230,7 +287,7 @@ let menuDataGQL = () => {
   });
 };
 
-// single post sidebars data
+// single page sidebars data
 let singlePageDataGQL = (data) => {
   return JSON.stringify({
     query: `query singlePageWidgetsData(
@@ -263,10 +320,13 @@ let singlePageDataGQL = (data) => {
   });
 };
 
-// single Page data only
-let sinlgePageGQL = (home_slug) => {
+// single Page data + sidebar info
+let sinlgePageGQL = (slug, setting_slug) => {
   return JSON.stringify({
-    query: `query page( $home_slug: String = "${home_slug}") {
+    query: `query page( 
+      $setting_slug: String = "${setting_slug}" 
+      $slug: String = "${slug}" 
+    ) {
       customizer {
         facebookLink
         linkedinLink
@@ -277,15 +337,10 @@ let sinlgePageGQL = (home_slug) => {
         xTwitterLink
         youtubeLink
       }  
-      pages(where: {name: $home_slug}) {
+      Home:pages(where: {name: $setting_slug}) {
             edges {
               node {
                 title
-                date
-                link
-                slug
-                contentTypeName
-                content
                 defaultPage {
                   sidebar {
                     title
@@ -299,36 +354,56 @@ let sinlgePageGQL = (home_slug) => {
                     }
                   }
                 }
+                
+              }
+            }
+          }
+          main: pages(where: {name: $slug}) {
+            edges {
+              node {
+                title
+                date
+                link
+                title
+                date
+                link
+                slug
+                contentTypeName
+                content
+                pageLayout{
+                  layout
+                }
                 seo {
-                  canonical
-                  opengraphSiteName
-                  metaDesc
-                  metaKeywords
-                  opengraphDescription
-                  opengraphTitle
-                  opengraphType
-                  opengraphUrl
-                  title
-                  twitterDescription
-                  twitterTitle
-                  twitterImage {
-                    id
-                    sourceUrl
-                    mediaDetails {
-                      height
-                      width
-                    }
-                    status
+                canonical
+                opengraphSiteName
+                metaDesc
+                metaKeywords
+                opengraphDescription
+                opengraphTitle
+                opengraphType
+                opengraphUrl
+                title
+                twitterDescription
+                twitterTitle
+                twitterImage {
+                  id
+                  sourceUrl
+                  mediaDetails {
+                    height
+                    width
                   }
-                  opengraphImage {
-                    sourceUrl
-                    mediaDetails {
-                      height
-                      width
-                    }
+                  status
+                }
+                opengraphImage {
+                  sourceUrl
+                  mediaDetails {
+                    height
+                    width
                   }
                 }
               }
+              }
+              
             }
           }
       }`,
@@ -974,4 +1049,5 @@ export {
   menuDataGQL,
   categoryGQL,
   searchGQL,
+  tagGQL,
 };

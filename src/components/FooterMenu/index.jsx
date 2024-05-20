@@ -3,7 +3,7 @@ import Link from "next/link";
 import { routeMenu } from "@/lib/helpers";
 export default function FooterMenu({ menu }) {
   return (
-    <div>
+    <React.Fragment>
       <div className="footerMenu">
         <h4 className="font-bold text-lg pb-4">{menu.name}</h4>
         <ul className="space-y-2">
@@ -24,6 +24,6 @@ export default function FooterMenu({ menu }) {
           })}
         </ul>
       </div>
-    </div>
+    </React.Fragment>
   );
 }

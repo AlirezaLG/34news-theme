@@ -23,7 +23,7 @@ export default function ({
                 width={70}
                 height={70}
                 style={{ width: "70px", height: "70px" }}
-                src={footer.footerLogo ? footer.footerLogo : "/logo.png"}
+                src={footer.footerLogo ? footer.footerLogo : "/logo-white.png"}
                 alt={footer.siteTitle}
               />
               <h3 className="ms-3 text-xl font-bold">{footer.slogun}</h3>
@@ -32,20 +32,21 @@ export default function ({
             <SocialMedia2 socialMedia={socialmedia} />
           </div>
         </div>
-        <div className="grid md:grid-cols-3 grid-cols-1">
+        <div className="grid grid-cols-3">
           <FooterMenu menu={footerMenu1} />
           <FooterMenu menu={footerMenu2} />
           <FooterMenu menu={footerMenu3} />
         </div>
       </div>
       <div className="container border-t border-[#5882CD]  text-center py-5 text-white">
-        <div className="flex">
+        <div className="flex md:flex-row xs:flex-col ">
           <span
-            className="me-auto"
+            className="md:me-auto xs:me-0 "
             dangerouslySetInnerHTML={{ __html: decode(footer?.copyright) }}
           ></span>
           {"    "}
           <span
+            className=""
             dangerouslySetInnerHTML={{ __html: decode(footer.techsharks) }}
           ></span>
         </div>

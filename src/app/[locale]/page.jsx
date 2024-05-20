@@ -52,7 +52,7 @@ const HomePage = async ({ params: { locale } }) => {
   } = await getDataGQL(homePageDataGQL(query?.homepage));
 
   return (
-    <main className="py-4 mainPage">
+    <main className="md:py-4 xs:py-0 mainPage">
       {/* first section */}
       {query?.homepage?.slideshow.show ||
       query?.homepage?.slideshowRight?.show ? (

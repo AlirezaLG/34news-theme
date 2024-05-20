@@ -62,7 +62,6 @@ export default async function SinglePost({
   const fullW =
     post?.postFormats?.nodes?.[0]?.slug === "post-format-status" || null;
 
-  console.log(post);
   return (
     <React.Fragment>
       {post?.postFormats?.nodes?.[0]?.slug === "post-format-video" && (
@@ -116,7 +115,7 @@ export default async function SinglePost({
                 return (
                   <a
                     key={tag.termTaxonomyId}
-                    href={route(tag, "tag")}
+                    // href= {route(tag, "tag")}
                     className="py-2 px-3 me-3 rounded-sm border-[#71a0f2] border-2 tag text-black hover:text-white hover:bg-[#71a0f2] "
                   >
                     # {tag.name}
@@ -131,7 +130,7 @@ export default async function SinglePost({
         </div>
         <div
           className={` ${
-            fullW ? "hidden" : "md:col-span-1 xs:col-span-3 ps-8"
+            fullW ? "hidden" : "md:col-span-1 xs:col-span-3 md:ps-8 xs:ps-0"
           } `}
         >
           <ListNews posts={sidebar.nodes} widget={sidebarWidget} />

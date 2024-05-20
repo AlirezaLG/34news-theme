@@ -14,7 +14,7 @@ export default function Video({ video1, video2, video3, widget }) {
   return (
     <div className="bg-black">
       <div className="container">
-        <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0 py-14">
+        <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0 py-10">
           <div>
             <PostTitleBlack
               style={styletitle}

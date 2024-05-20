@@ -16,27 +16,28 @@ export async function generateMetadata({ params: { slug, locate } }) {
   );
 
   const url = process.env.NEXT_PUBLIC_APP_URL + "/pages/" + slug;
-  return getMetaFromYoast(meta?.data?.pages?.edges[0].node?.seo, url);
+  return getMetaFromYoast(meta?.data?.main?.edges[0].node?.seo, url);
 }
 
 export default async function SinglePost({ params: { slug, locale } }) {
   const { t, resources } = await initTranslations(locale);
 
-  // this is page data
+  // this is main page + sidebar info
   const SinglePostData = await getPostGQL(
-    sinlgePageGQL(process.env.NEXT_PUBLIC_HOME_SLUG)
+    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
   );
 
   // page data address
-  const post = SinglePostData?.data?.pages?.edges[0].node;
+  const post = SinglePostData?.data?.main?.edges[0].node;
 
   // page sidebar data
+  // console.log(SinglePostData.data.Home);
   const { sidebar } = await getDataGQL(
-    singlePageDataGQL(SinglePostData.data.pages.edges[0].node.defaultPage)
+    singlePageDataGQL(SinglePostData.data.Home.edges[0].node.defaultPage)
   );
   // widget settings
   const { sidebar: sidebarWidget } =
-    SinglePostData.data.pages.edges[0].node.defaultPage;
+    SinglePostData.data.Home.edges[0].node.defaultPage;
 
   const socialMedia = {
     facebook: SinglePostData?.data?.customizer?.facebookLink,
@@ -48,9 +49,11 @@ export default async function SinglePost({ params: { slug, locale } }) {
     telegram: SinglePostData?.data?.customizer?.telegramLink,
     tiktok: SinglePostData?.data?.customizer?.tiktokLink,
   };
+
+  const fullW = post?.pageLayout.layout[0] === "Fullwidth" || null;
   return (
-    <div className="container single defaultPage py-8 grid grid-cols-3 gap-5">
-      <div className="col-span-2">
+    <div className="container single defaultPage py-8 grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0">
+      <div className={` ${fullW ? "col-span-3 md:mx-52" : "col-span-2"}  `}>
         <h1
           className="text-4xl "
           dangerouslySetInnerHTML={{ __html: decode(post?.title) }}
@@ -67,7 +70,7 @@ export default async function SinglePost({ params: { slug, locale } }) {
 
         <Sharing post={post} />
       </div>
-      <div className="col-span-1 ps-8">
+      <div className={` ${fullW ? "hidden" : "col-span-1 md:ps-8 xs:ps-0"}  `}>
         <ListNews posts={sidebar.nodes} widget={sidebarWidget} />
         <SocialMedia socialMedia={socialMedia} />
       </div>

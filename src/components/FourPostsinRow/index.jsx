@@ -5,7 +5,7 @@ import Card1 from "@/components/Card1";
 
 export default function FourPostinRow({ posts, widget }) {
   return (
-    <div className="grid md:grid-cols-3 xs:grid-cols-1 mt-10 gap-5">
+    <div className="grid md:grid-cols-3 xs:grid-cols-1 md:mt-10 xs:mt-3 md:gap-5 xs:gap-0">
       {posts.map((post, index) => {
         if (index > 0) {
           return (

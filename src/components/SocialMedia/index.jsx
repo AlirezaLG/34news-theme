@@ -18,7 +18,7 @@ export default function SocialMedia({ socialMedia }) {
   const { t } = useTranslation();
 
   return (
-    <div className="py-5">
+    <div className="md:py-5 xs:pt-3 xs:pb-0">
       <PostTitle title={"Social media"} />
       <ul className=" flex flex-row text-white socialMedia  pb-3 ps-0">
         {socialMedia ? (

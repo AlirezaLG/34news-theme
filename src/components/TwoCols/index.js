@@ -10,7 +10,7 @@ export default function TwoCols({
 }) {
   return (
     <div className="container">
-      <div className="grid md:grid-cols-3 gap-5 my-5 mb-8">
+      <div className="grid md:grid-cols-3 md:gap-5 xs:gap-0 my-5 mb-8">
         <div className="md:col-span-2 xs:col-span-3">
           <PostTitle
             title={widgetTwoCols?.title}

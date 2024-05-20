@@ -15,7 +15,7 @@ export default function VideoColumn({ posts, category }) {
           );
         }
       })}
-      <div className="space-y-5">
+      <div className="space-y-5 mb-5">
         {posts.map((post, index) => {
           if (index > 0) {
             return (
