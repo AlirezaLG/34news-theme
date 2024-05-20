@@ -6,7 +6,7 @@ import NavigationMenu from "../NavigationMenu";
 
 export default function Header({ primaryMenu, topMenu, header, social1 }) {
   return (
-    <header>
+    <React.Fragment>
       <TopHeader menu={topMenu} social2={social1} header={header} />
       <div className="container flex py-2">
         <Link href={header.siteUrl ? header.siteUrl : "/"}>
@@ -21,7 +21,7 @@ export default function Header({ primaryMenu, topMenu, header, social1 }) {
           />
         </Link>
       </div>
-      <NavigationMenu menu={primaryMenu} />
-    </header>
+      <NavigationMenu menu={primaryMenu} header={header} />
+    </React.Fragment>
   );
 }
