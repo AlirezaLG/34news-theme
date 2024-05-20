@@ -2,11 +2,9 @@ import React from "react";
 import Image from "next/image";
 
 export default function MImage({ post, imgsize, imgClass = "" }) {
-  const imageSize = imgsize ? imgsize : 0;
-  const img =
-    post?.featuredImage?.node?.mediaDetails?.sizes?.[imageSize] ||
-    post?.featuredImage?.node?.mediaDetails?.sizes?.[0] ||
-    "";
+  // console.log(post?.featuredImage?.node?.mediaDetails);
+  // const imageSize = imgsize ? imgsize : 0;
+  const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
 
   return (
     <React.Fragment>

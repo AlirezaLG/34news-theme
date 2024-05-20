@@ -86,7 +86,7 @@ export default async function SinglePost({
             fullW ? "col-span-3 md:mx-52 " : "md:col-span-2 xs:col-span-3"
           } `}
         >
-          {isEmptyDefault && <MImage post={post} imgsize={1} imgClass="mb-4" />}
+          {isEmptyDefault && <MImage post={post} imgsize={0} imgClass="mb-4" />}
           <h1
             className="text-4xl font-bold"
             dangerouslySetInnerHTML={{ __html: decode(post?.title) }}
