@@ -159,12 +159,12 @@ export default function NavigationMenu({ menu ,header}) {
                   return (
                     // First level menu
                     menuItem.childItems.nodes.length > 0 ? (
-                      <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="dropdownButton text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center " type="button">
+                      <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="dropdownButton text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-md px-5 py-2.5 text-center inline-flex items-center hover:bg-gray-50 md:hover:bg-white  md:hover:text-primary hover:cursor-pointer" type="button">
                         {menuItem.label}
                         <svg className="w-2.5 h-2.5 ml-2" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
-                        <div className="dropdownMenu hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <div className="dropdownMenu hidden z-10 bg-white divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-gray-700 border-t-4 border-primary ">
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                             {/* second level menu */}
                             {menuItem.childItems.nodes.map((child) => {
@@ -175,7 +175,7 @@ export default function NavigationMenu({ menu ,header}) {
                                   <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                                   </svg>
-                                  <div className="subdropdownMenu z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                  <div className="subdropdownMenu z-10 hidden bg-white divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-gray-700">
                                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton" >
                                       {/* third level */}
                                       {child.childItems.nodes.map(
@@ -224,7 +224,7 @@ export default function NavigationMenu({ menu ,header}) {
           </div>
           <SearchMenu />
           <div className="xs:ms-auto md:ms-0 ps-0 pe-3">
-            <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
+            <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-sm md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
               <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14" >
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
               </svg>

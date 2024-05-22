@@ -14,7 +14,7 @@ export default function FirstSection({
   return (
     <div className="container">
       <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0">
-        <div className="md:col-span-2 py-2">
+        <div className="md:col-span-2 grid md:grid-cols-3 xs-grid-1 md:gap-5 xs:gap-0  py-2">
           <BigImage posts={slideshow} widget={widgetSlideshow} />
           <FourPostinRow posts={slideshow} widget={widgetSlideshow} />
         </div>

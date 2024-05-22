@@ -14,7 +14,7 @@ const Card1 = ({ post, category, style, content, imgsize = 0 }) => {
   const link = route(post, category);
 
   return (
-    <div className="">
+    <React.Fragment>
       <div className="w-full bg-white rounded-md  ">
         <Link href={link || ""}>
           <MImage post={post} imgsize={imgsize} />
@@ -42,7 +42,7 @@ const Card1 = ({ post, category, style, content, imgsize = 0 }) => {
           )}
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 export default Card1;

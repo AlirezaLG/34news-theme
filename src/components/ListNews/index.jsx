@@ -8,7 +8,7 @@ export default function ListNews({ posts, widget }) {
   // console.log(widget);
   const { t } = useTranslation();
   return (
-    <div>
+    <React.Fragment>
       <PostTitle size="text-xl" title={widget?.title} />
 
       <div className="w-full text-gray-900 bg-white rounded-lg pb-4">
@@ -24,6 +24,6 @@ export default function ListNews({ posts, widget }) {
           <p>{t("No posts available")}</p>
         )}
       </div>
-    </div>
+    </React.Fragment>
   );
 }

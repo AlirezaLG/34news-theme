@@ -19,11 +19,11 @@ export default function BigImage({ posts, category }) {
         if (index < 1) {
           const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
           return (
-            <div
-              className="grid md:grid-cols-2 xs:grid-cols-1 mt-2"
-              key={post.id}
-            >
-              <div className="py-4 px-2 xs:order-2 md:order-1">
+            <div className="col-span-2  mt-5" key={post.id}>
+              <a className=" " href={route(post, cat) || ""}>
+                <MImage post={post} imgsize={0} />
+              </a>
+              <div className="py-4 px-2 ">
                 <Link href={route(post, cat) || ""}>
                   <h2 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 hover:text-primary">
                     {decode(post?.title)}
@@ -31,16 +31,10 @@ export default function BigImage({ posts, category }) {
                 </Link>
 
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  {removeHtmlTags(limitWords(post?.excerpt, LIMIT))}
+                  {removeHtmlTags(limitWords(post?.excerpt, 50))}
                 </p>
                 <PostDate date={post?.date} />
               </div>
-              <a
-                className="col-span-1 xs:order-1 md:order-2"
-                href={route(post, cat) || ""}
-              >
-                <MImage post={post} imgsize={0} />
-              </a>
             </div>
           );
         } else {

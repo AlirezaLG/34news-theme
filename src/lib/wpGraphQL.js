@@ -644,7 +644,7 @@ let homePageDataGQL = (data) => {
                   featuredImage {
                   node {
                       mediaDetails {
-                      sizes(include: [MEDIUM]) {
+                      sizes(include: [MEDIUM_LARGE , MEDIUM]) {
                           sourceUrl
                           width
                           height

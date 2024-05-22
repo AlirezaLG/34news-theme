@@ -7,10 +7,10 @@ import PostDate from "../PostDate";
 
 export default function single({ post, category }) {
   return (
-    <div className="listNew ">
+    <div className="listNew py-2 first:pt-0 ">
       <button
         type="button"
-        className="relative  inline-flex content-start  w-full px-0 pb-2 text-sm font-medium border-b border-gray-200 rounded-t-lg  hover:text-blue-700 focus:z-10 focus:ring-2"
+        className="relative  inline-flex content-start w-full pb-2  px-0 text-sm font-medium  border-b border-gray-200 rounded-t-lg  hover:text-blue-700 focus:z-10 focus:ring-2"
       >
         <FaCaretRight className="mt-1 me-1" />
         <Link href={route(post, category) || ""}>
