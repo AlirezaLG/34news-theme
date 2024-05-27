@@ -50,6 +50,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
   };
   // prepare the footer object
   const footer = {
+    favIcon: customizer.favIcon,
     copyright: customizer.copyright,
     email: customizer.email,
     footerLogo: customizer.footerLogo,
@@ -61,7 +62,6 @@ const RootLayout = async ({ params: { locale }, children }) => {
     siteUrl: customizer.siteUrl,
     footerDescription: customizer.footerDescription,
   };
-
   const {
     PRIMARY: primaryMenu,
     TOP_HEADER: topMenu,
@@ -72,6 +72,9 @@ const RootLayout = async ({ params: { locale }, children }) => {
   // console.log(primaryMenu.menuItems.nodes);
   return (
     <html dir={`${locale === "en" ? "ltr" : "rtl"}`} lang={locale}>
+      <head>
+        <link rel="icon" href={footer.favIcon} sizes="32x32" />
+      </head>
       <body
         className={` 
       ${locale === "en" ? " ltr en " + roboto.className : " rtl fa qalam "}  
