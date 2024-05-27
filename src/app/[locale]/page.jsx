@@ -8,23 +8,26 @@ import OneCol from "@/components/Oncol";
 import TwoCols from "@/components/TwoCols";
 import FirstSection from "@/components/FirstSection";
 // export const revalidate = 100;
+import initTranslations from "@/i18n";
 
 // Dynamic metaData
-export async function generateMetadata() {
+export async function generateMetadata({ params: { locale } }) {
   const gql = await getHomePageGQL(
-    homePageGQL(process.env.NEXT_PUBLIC_HOME_SLUG)
+    homePageGQL(process.env.NEXT_PUBLIC_HOME_SLUG, locale)
   );
   return getMetaFromYoast(gql.pages.edges[0].node.seo);
 }
 
 const HomePage = async ({ params: { locale } }) => {
+  const { t, resources } = await initTranslations(locale);
   const gql = await getHomePageGQL(
-    homePageGQL(process.env.NEXT_PUBLIC_HOME_SLUG)
+    homePageGQL(process.env.NEXT_PUBLIC_HOME_SLUG),
+    locale
   );
 
   const query = gql?.pages?.edges[0].node;
 
-  // console.log(gql.customizer);
+  // // console.log(gql.customizer);
   const socialmedia = {
     facebook: gql?.customizer?.facebookLink,
     xTwitter: gql?.customizer?.xTwitterLink,
@@ -35,7 +38,6 @@ const HomePage = async ({ params: { locale } }) => {
     telegram: gql?.customizer?.telegramLink,
     tiktok: gql?.customizer?.tiktokLink,
   };
-  // console.log("json data "+CustomQuery(gql.homepage));
 
   // all widgets data
   const {
@@ -49,8 +51,9 @@ const HomePage = async ({ params: { locale } }) => {
     threeCols,
     oneCols,
     oneCols2,
-  } = await getDataGQL(homePageDataGQL(query?.homepage));
+  } = await getDataGQL(homePageDataGQL(query?.homepage), locale);
 
+  // console.log(query?.homepage?.slideshow.category.nodes);
   return (
     <main className="md:py-4 xs:py-0 mainPage">
       {/* first section */}
@@ -62,6 +65,7 @@ const HomePage = async ({ params: { locale } }) => {
           slideshowRight={slideshowRight?.nodes}
           widgetSlideshowRight={query?.homepage?.slideshowRight}
           socialMedia={socialmedia}
+          locale={locale}
         />
       ) : null}
 

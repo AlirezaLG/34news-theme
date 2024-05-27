@@ -1,11 +1,28 @@
+"use client";
 import React from "react";
-import TopHeader from "../TopHeader";
 import Link from "next/link";
 import Image from "next/image";
 import NavigationMenu from "../NavigationMenu";
-import { routeMenu } from "@/lib/helpers";
+// import { useLanguage } from "@/providers/LanguageContext";
+import initTranslations from "../../i18n";
+import { useRouter } from "next/navigation";
 
-export default function Header({ primaryMenu, topMenu, header, social1 }) {
+export default function Header({
+  primaryMenu,
+  topMenu,
+  header,
+  social1,
+  locale,
+}) {
+  const router = useRouter();
+  const handleClick = (e) => {
+    const loc = locale === "en" ? "/fa" : "/en";
+    e.preventDefault();
+    window.location.href = loc;
+  };
+
+  const { t } = initTranslations();
+  // console.log(locale);
   return (
     <React.Fragment>
       {/* <TopHeader menu={topMenu} social2={social1} header={header} /> */}
@@ -24,23 +41,19 @@ export default function Header({ primaryMenu, topMenu, header, social1 }) {
             />
           </Link>
           <ul className="ms-auto me-5 flex pt-6">
-            {topMenu.menuItems.nodes.map((menuItem) => {
-              return (
-                <li key={menuItem.id} className="px-3   ">
-                  <Link
-                    href={routeMenu(menuItem)}
-                    target={menuItem.target ? menuItem.target : ""}
-                    className="pt-1 text-xs hover:text-primary text-gray-800"
-                  >
-                    {menuItem.label}
-                  </Link>
-                </li>
-              );
-            })}
+            <li className="px-3   ">
+              <button
+                onClick={handleClick}
+                className="pt-1 text-xs hover:text-primary text-gray-800"
+              >
+                {locale === "en" ? "فارسی" : "English"}
+              </button>
+            </li>
+            <li className="px-3"></li>
           </ul>
         </di>
       </div>
-      <NavigationMenu menu={primaryMenu} header={header} />
+      <NavigationMenu menu={primaryMenu} header={header} locale={locale} />
     </React.Fragment>
   );
 }

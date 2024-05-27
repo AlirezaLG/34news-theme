@@ -19,7 +19,7 @@ export default function SocialMedia({ socialMedia }) {
 
   return (
     <div className="md:py-5 xs:pt-3 xs:pb-0">
-      <PostTitle title={"Social media"} />
+      <PostTitle title={t("social media")} />
       <ul className=" flex flex-row text-white socialMedia  pb-3 ps-0">
         {socialMedia ? (
           Object.entries(socialMedia).map(([platform, link]) => {

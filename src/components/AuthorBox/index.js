@@ -4,9 +4,9 @@ import Image from "next/image";
 export default function AuthorBox({ author }) {
   console.log(author);
   return (
-    <div class="p-3 border rounded text-gray-500">
-      <div class="flex items-center">
-        {/* <img class="w-16 h-16 rounded-full mr-3" src="https://loremflickr.com/320/320/girl" alt="jane"> */}
+    <div className="p-3 border rounded text-gray-500">
+      <div className="flex items-center">
+        {/* <img className="w-16 h-16 rounded-full mr-3" src="https://loremflickr.com/320/320/girl" alt="jane"> */}
         <Image
           unoptimized
           width={100}
@@ -19,10 +19,10 @@ export default function AuthorBox({ author }) {
             "/default.jpg"
           }
         />
-        <div class="text-sm">
+        <div className="text-sm">
           <a
             href="#"
-            class="font-medium leading-none text-gray-900 hover:text-indigo-600 transition duration-500 ease-in-out"
+            className="font-medium leading-none text-gray-900 hover:text-indigo-600 transition duration-500 ease-in-out"
           >
             {author.name}
           </a>
@@ -30,7 +30,7 @@ export default function AuthorBox({ author }) {
         </div>
       </div>
 
-      <p class="my-1 px-3 text-md text-gray-900 ">{author.description}</p>
+      <p className="my-1 px-3 text-md text-gray-900 ">{author.description}</p>
     </div>
   );
 }

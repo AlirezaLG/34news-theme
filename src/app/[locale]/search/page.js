@@ -9,7 +9,8 @@ export default async function SearchPage({ params: { locale }, searchParams }) {
   const { t, resources } = await initTranslations(locale);
 
   const SearchData = await getPostGQL(
-    searchGQL(searchParams.s, postPerPage, searchParams)
+    searchGQL(searchParams.s, postPerPage, searchParams),
+    locale
   );
 
   const pageInfo = SearchData.data.posts.pageInfo;
@@ -37,7 +38,7 @@ export default async function SearchPage({ params: { locale }, searchParams }) {
       ? `/search?s=${searchParams.s}&page=${prevPage}&cursor=${startCursor}&p=prev`
       : null;
 
-  console.log(searchParams);
+  // console.log(searchParams);
   return (
     <React.Fragment>
       <h1 className="text-start container mt-8 text-3xl">

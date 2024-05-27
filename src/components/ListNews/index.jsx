@@ -4,8 +4,7 @@ import Single from "./single";
 import { useTranslation } from "react-i18next";
 import PostTitle from "../PostTitle";
 
-export default function ListNews({ posts, widget }) {
-  // console.log(widget);
+export default function ListNews({ posts, widget, locale }) {
   const { t } = useTranslation();
   return (
     <React.Fragment>
@@ -18,6 +17,7 @@ export default function ListNews({ posts, widget }) {
               key={post?.id}
               post={post}
               category={widget?.category?.nodes[0].slug}
+              locale={locale}
             />
           ))
         ) : (

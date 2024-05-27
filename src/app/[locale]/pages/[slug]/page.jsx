@@ -10,9 +10,10 @@ import Sharing from "@/components/Sharing";
 import SocialMedia from "@/components/SocialMedia";
 
 // Dynamic metaData
-export async function generateMetadata({ params: { slug, locate } }) {
+export async function generateMetadata({ params: { slug, locale } }) {
   const meta = await getPostGQL(
-    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
+    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG),
+    locale
   );
 
   const url = process.env.NEXT_PUBLIC_APP_URL + "/pages/" + slug;
@@ -24,7 +25,8 @@ export default async function SinglePost({ params: { slug, locale } }) {
 
   // this is main page + sidebar info
   const SinglePostData = await getPostGQL(
-    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
+    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG),
+    locale
   );
 
   // page data address
@@ -33,7 +35,8 @@ export default async function SinglePost({ params: { slug, locale } }) {
   // page sidebar data
   // console.log(SinglePostData.data.Home);
   const { sidebar } = await getDataGQL(
-    singlePageDataGQL(SinglePostData.data.Home.edges[0].node.defaultPage)
+    singlePageDataGQL(SinglePostData.data.Home.edges[0].node.defaultPage),
+    locale
   );
   // widget settings
   const { sidebar: sidebarWidget } =

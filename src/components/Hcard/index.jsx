@@ -21,12 +21,12 @@ export default function Hcard({
         href={route(post, category) || ""}
         className={`grid grid-cols-5 ${
           content ? "md:gap-5" : "md:gap-1"
-        } xs:gap-1  space-x-2 items-start ${
+        } xs:gap-1  items-start ${
           themeBlack ? "bg-transparent" : "bg-white"
         } rounded-md `}
       >
         <MImage post={post} imgsize={imgsize} imgClass={"col-span-2"} />
-        <div className=" col-span-3 flex flex-col justify-between  leading-normal">
+        <div className="ps-1 col-span-3 flex flex-col justify-between  leading-normal">
           <h5
             className={`mb-2 ${
               content ? "md:text-2xl" : "md:text-md"
@@ -39,7 +39,7 @@ export default function Hcard({
           <PostDate date={post?.date} themeBlack={themeBlack} />
           {content ? (
             <p
-              className="mb-3 xs:hidden md:block font-normal text-gray-700 "
+              className="mb-3  xs:hidden md:block font-normal text-gray-700 "
               dangerouslySetInnerHTML={{
                 __html: removeHtmlTags(limitWords(post?.excerpt, LIMIT)),
               }}

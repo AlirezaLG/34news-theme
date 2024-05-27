@@ -1,10 +1,11 @@
 import { cache } from "react";
-import { axiosGQL } from "./axios";
+import { axiosGQL, createAxiosInstance } from "./axios";
 
 // get data with Graph QL
-const getHomePageGQL = cache(async (data) => {
+const getHomePageGQL = cache(async (data, locale) => {
   try {
-    const response = await axiosGQL.post("/", data);
+    const axiosInstance = createAxiosInstance(locale);
+    const response = await axiosInstance.post("/", data);
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -17,9 +18,10 @@ const getHomePageGQL = cache(async (data) => {
  * @param {Object} data - The data to be sent in the GraphQL request.
  * @returns {Promise<Object|null>} - The response data from the GraphQL request, or null if an error occurs.
  */
-const getDataGQL = cache(async (data) => {
+const getDataGQL = cache(async (data, locale) => {
   try {
-    const response = await axiosGQL.post("/", data);
+    const axiosInstance = createAxiosInstance(locale);
+    const response = await axiosInstance.post("/", data);
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -27,9 +29,10 @@ const getDataGQL = cache(async (data) => {
   }
 });
 
-const getPostGQL = cache(async (data) => {
+const getPostGQL = cache(async (data, locale) => {
   try {
-    const response = await axiosGQL.post("/", data);
+    const axiosInstance = createAxiosInstance(locale);
+    const response = await axiosInstance.post("/", data);
     return response.data;
   } catch (error) {
     console.error(error);

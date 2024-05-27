@@ -3,25 +3,20 @@ import Axios from "axios";
 import https from "https";
 // const config = getConfig();
 
-let axiosGQL;
-axiosGQL = Axios.create({
-  method: "post",
-  maxBodyLength: Infinity,
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const createAxiosInstance = (locale) => {
+  const baseURL =
+    locale === "en"
+      ? process.env.NEXT_PUBLIC_BACKEND_API_URL_EN
+      : process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
-// REST API URL
-let axios;
-axios = Axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
-  headers: {},
-  withCredentials: true,
-  httpsAgent: new https.Agent({
-    rejectUnauthorized: false,
-  }),
-});
+  return Axios.create({
+    method: "post",
+    maxBodyLength: Infinity,
+    baseURL,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 
-export { axios, axiosGQL };
+export { createAxiosInstance };

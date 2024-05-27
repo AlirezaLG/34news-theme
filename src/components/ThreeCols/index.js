@@ -53,7 +53,7 @@ export default function ThreeCols({ posts, widget }) {
         </div>
 
         {/* third cal */}
-        <div className="mt-5">
+        <div className="xs:mt-5 md:mt-0">
           {posts.map((post, index) => {
             if (index > 4) {
               return (

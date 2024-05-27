@@ -15,9 +15,9 @@ export default function CprogressBar() {
         easing="ease"
         speed={200}
         xshadow="0 0 10px #2865D2 , 0 0 5px #2865D2"
-        template='<div class="bar" style="color:#fff" role="bar"><div class="peg"></div></div> 
-        <div class="spinner" role="spinner" style="color:#fff">
-        <div class="spinner-icon " style="color:#fff"></div></div>'
+        template='<div className="bar" style="color:#fff" role="bar"><div className="peg"></div></div> 
+        <div className="spinner" role="spinner" style="color:#fff">
+        <div className="spinner-icon " style="color:#fff"></div></div>'
         zIndex={99}
         showAtBottom={false}
       />

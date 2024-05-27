@@ -5,8 +5,7 @@ import { Dropdown } from "flowbite";
 import { Drawer } from "flowbite";
 import SearchMenu from "../SearchMenu";
 
-export default function NavigationMenu({ menu ,header}) {
-  // console.log(menu);
+export default function NavigationMenu({ menu ,header, locale}) {
   useEffect(() => {
     const targetEls = document.getElementsByClassName("dropdownMenu");
     const triggerEls = document.getElementsByClassName("dropdownButton");
@@ -31,8 +30,9 @@ export default function NavigationMenu({ menu ,header}) {
     const targetEls2 = document.getElementsByClassName("subdropdownMenu");
     const triggerEls2 = document.getElementsByClassName("subdropdownButton");
     if (targetEls2.length > 0 && triggerEls2.length > 0) {
+      const place = locale==='en'? 'right-start': 'left-start';
       const options = {
-        placement: "right-start",
+        placement:  place,
         triggerType: "hover",
         offsetSkidding: 1,
         offsetDistance: 1,
@@ -57,7 +57,7 @@ export default function NavigationMenu({ menu ,header}) {
       bodyScrolling: false,
       edge: false,
       edgeOffset: "",
-      backdropClasses: "bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30",
+      backdropClasses: "",
     };
     // instance options object
     const instanceOptions = {
@@ -66,29 +66,29 @@ export default function NavigationMenu({ menu ,header}) {
     };
     const drawer = new Drawer($targetEl, options, instanceOptions);
 
-    
   }, []);
 
   return (
     <div className="w-100 bg-primary">
       <nav className="container">
-        <div className="flex flex-wrap items-start  max-w-screen-xl  ">
+        <div
+        
+         className="flex flex-wrap items-start  max-w-screen-xl  ">
 
-          
           {/* mobile only drawer */}
-          <div id="drawer-navigation" class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label" >
-            <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"  >
+          <div id="drawer-navigation" className={` ${ locale==='en'? '-translate-x-full left-0' : 'translate-x-full right-0' } xs:block md:hidden fixed  transition-transform  top-0 z-40 w-64 h-screen p-4 overflow-y-auto  bg-white dark:bg-gray-800`} tabIndex="-1" aria-labelledby="drawer-navigation-label" >
+            <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"  >
               {header.siteTitle}
             </h5>
-            <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" >
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" ></path>
+            <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+              <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" >
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" ></path>
               </svg>
-              <span class="sr-only">Close menu</span>
+              <span className="sr-only">Close menu</span>
             </button>
 
-            <div class="py-4 overflow-y-auto">
-              <ul class=" font-medium">
+            <div className="py-4 overflow-y-auto">
+              <ul className=" font-medium">
               {menu.menuItems.nodes.map((menuItem) => {
                 if (!menuItem.parentId) {
                   return (
@@ -97,7 +97,7 @@ export default function NavigationMenu({ menu ,header}) {
                       <li key={menuItem.id} aria-controls={menuItem.id} data-collapse-toggle={menuItem.id} className="text-black border-b border-gray-100 text-md w-full mt-0 ps-0 py-2" type="button">
                         {menuItem.label}
                         <svg className="w-2.5 h-2.5 m-2 float-end" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                         </svg>
                           <ul id={menuItem.id} className="bg-gray-50 hidden my-2 py-2 text-sm text-gray-700 dark:text-gray-200" >
                             {/* second level menu */}
@@ -106,7 +106,7 @@ export default function NavigationMenu({ menu ,header}) {
                                 <li key={child.id} aria-controls={child.id} data-collapse-toggle={child.id}  className="text-black  text-md w-full mt-0 ps-2 pe-2 py-2" type="button">
                                   {child.label}
                                   <svg className="w-2.5 h-2.5 m-2 float-end" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                                   </svg>
 
                                     <ul id={child.id} className="bg-gray-50   py-2 text-sm text-gray-700 dark:text-gray-200" >
@@ -161,8 +161,8 @@ export default function NavigationMenu({ menu ,header}) {
                     menuItem.childItems.nodes.length > 0 ? (
                       <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="dropdownButton text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-md px-5 py-2.5 text-center inline-flex items-center hover:bg-gray-50 md:hover:bg-white  md:hover:text-primary hover:cursor-pointer" type="button">
                         {menuItem.label}
-                        <svg className="w-2.5 h-2.5 ml-2" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        <svg className="w-2.5 h-2.5 ms-2" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
+                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                         </svg>
                         <div className="dropdownMenu hidden z-10 bg-white divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-gray-700 border-t-4 border-primary ">
                           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
@@ -170,10 +170,10 @@ export default function NavigationMenu({ menu ,header}) {
                             {menuItem.childItems.nodes.map((child) => {
                               
                               return child.childItems.nodes.length > 0 ? (
-                                <li key={child.id} data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class=" subdropdownButton flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >
+                                <li key={child.id} data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" className=" subdropdownButton flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >
                                   {child.label}
-                                  <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                  <svg className="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                   </svg>
                                   <div className="subdropdownMenu z-10 hidden bg-white divide-y divide-gray-100 rounded-sm shadow w-44 dark:bg-gray-700">
                                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton" >

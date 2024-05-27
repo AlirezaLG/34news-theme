@@ -14,10 +14,13 @@ import { setDefaultNamespace } from "i18next";
 import AuthorBox from "@/components/AuthorBox";
 
 // Dynamic metaData
-export async function generateMetadata({ params: { category, slug, locate } }) {
+export async function generateMetadata({ params: { category, slug, locale } }) {
   const meta = await getPostGQL(
-    sinlgePostGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
+    sinlgePostGQL(decodeURIComponent(slug), process.env.NEXT_PUBLIC_HOME_SLUG),
+    locale
   );
+
+  // console.log(sinlgePostGQL(decode(slug), process.env.NEXT_PUBLIC_HOME_SLUG));
   const url =
     process.env.NEXT_PUBLIC_APP_URL + "/posts/" + category + "/" + slug;
   return getMetaFromYoast(meta.data.postBy.seo, url);
@@ -29,18 +32,20 @@ export default async function SinglePost({
   const { t, resources } = await initTranslations(locale);
 
   const SinglePostData = await getPostGQL(
-    sinlgePostGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG)
+    sinlgePostGQL(decodeURIComponent(slug), process.env.NEXT_PUBLIC_HOME_SLUG),
+    locale
   );
   const post = SinglePostData.data.postBy;
 
   // add tags widget layout to list the related posts
   if (SinglePostData.data.pages.edges[0].node.singlePost.related) {
     SinglePostData.data.pages.edges[0].node.singlePost.related.tags =
-      post.tags.nodes.map((node) => node.termTaxonomyId);
+      post?.tags?.nodes?.map((node) => node.termTaxonomyId);
   }
   // home page data
   const { sidebar, related } = await getDataGQL(
-    singlePostDataGQL(SinglePostData.data.pages.edges[0].node.singlePost)
+    singlePostDataGQL(SinglePostData?.data?.pages?.edges[0].node.singlePost),
+    locale
   );
   // widget settings
   const { sidebar: sidebarWidget, related: relatedWidget } =
@@ -71,10 +76,10 @@ export default async function SinglePost({
               className="w-full md:px-32 md:h-[34rem] xs:h-64"
               src={`https://www.youtube.com/embed/${videoId}`}
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
             ></iframe>
           </div>
         </div>

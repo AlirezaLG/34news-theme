@@ -10,7 +10,7 @@ import CprogressBar from "@/components/CprogressBar";
 import { menuDataGQL } from "@/lib/wpGraphQL";
 import { getDataGQL } from "@/lib/functions";
 import TranslationsProvider from "@/providers/TranslationsProvider";
-
+// import { LanguageProvider } from "@/providers/LanguageContext";
 const roboto = Noticia_Text({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -18,8 +18,10 @@ const roboto = Noticia_Text({
 
 const RootLayout = async ({ params: { locale }, children }) => {
   const { t, resources } = await initTranslations(locale);
+  // console.log(locale);
   const { menus: menu, customizer: customizer } = await getDataGQL(
-    menuDataGQL()
+    menuDataGQL(),
+    locale
   );
 
   // prepare the social media object
@@ -69,8 +71,12 @@ const RootLayout = async ({ params: { locale }, children }) => {
   } = menusByName;
   // console.log(primaryMenu.menuItems.nodes);
   return (
-    <html>
-      <body className={roboto.className}>
+    <html dir={`${locale === "en" ? "ltr" : "rtl"}`} lang={locale}>
+      <body
+        className={` 
+      ${locale === "en" ? " ltr en " + roboto.className : " rtl fa qalam "}  
+  `}
+      >
         <TranslationsProvider
           namespaces={["default"]}
           locale={locale}
@@ -82,9 +88,8 @@ const RootLayout = async ({ params: { locale }, children }) => {
             primaryMenu={primaryMenu}
             topMenu={topMenu}
             social1={socialmedia}
+            locale={locale}
           />
-          {/* {t("home")} */}
-          {/* {React.cloneElement(children, customizer)} */}
           {children}
           <Footer
             socialmedia={socialmedia}
