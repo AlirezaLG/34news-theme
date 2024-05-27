@@ -32,38 +32,38 @@ export default function Sharing({ post, category = null }) {
   return (
     <div className="sharing flex">
       <p className="pe-3 pt-1">{t("Sharing on social media")}</p>
-      <ul className="flex space-x-3">
-        <li className="float-none">
+      <ul className="flex ">
+        <li className="float-none pe-2">
           <FacebookShareButton url={url} quote={post?.title}>
             <FacebookIcon size={32} round />
           </FacebookShareButton>
         </li>
 
-        <li className="float-none">
+        <li className="float-none pe-2">
           <TwitterShareButton url={url} title={post?.title}>
             <XIcon size={32} round />
           </TwitterShareButton>
         </li>
 
-        <li className="float-none">
+        <li className="float-none pe-2">
           <LinkedinShareButton url={url} title={post?.title}>
             <LinkedinIcon size={32} round />
           </LinkedinShareButton>
         </li>
 
-        <li className="float-none">
+        <li className="float-none pe-2">
           <EmailShareButton url={url} title={post?.title}>
             <EmailIcon size={32} round />
           </EmailShareButton>
         </li>
 
-        <li className="float-none">
+        <li className="float-none pe-2">
           <TelegramShareButton url={url} title={post?.title}>
             <TelegramIcon size={32} round />
           </TelegramShareButton>
         </li>
 
-        <li className="float-none">
+        <li className="float-none pe-2">
           <WhatsappShareButton url={url} title={post?.title}>
             <WhatsappIcon size={32} round />
           </WhatsappShareButton>

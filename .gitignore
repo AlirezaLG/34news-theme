@@ -3,5 +3,5 @@ node_modules/
 .next/
 .env.local
 .git/
-34nn.zip
+*.zip
 .DS_Store
