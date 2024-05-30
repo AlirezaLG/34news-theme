@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 export default function AuthorBox({ author }) {
-  console.log(author);
+  // console.log(author);
   return (
     <div className="p-3 border rounded text-gray-500">
       <div className="flex items-center">

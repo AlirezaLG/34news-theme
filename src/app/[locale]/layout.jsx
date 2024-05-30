@@ -85,7 +85,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
           locale={locale}
           resources={resources}
         >
-          <CprogressBar />
+          <CprogressBar locale={locale} />
           <Header
             header={header}
             primaryMenu={primaryMenu}
