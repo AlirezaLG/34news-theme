@@ -12,7 +12,8 @@ export default async function CategoryPage({
   const { t, resources } = await initTranslations(locale);
   // console.log(searchParams);
   const categoryData = await getPostGQL(
-    categoryGQL(category, postPerPage, searchParams)
+    categoryGQL(decodeURIComponent(category), postPerPage, searchParams),
+    locale
   );
 
   const pageInfo = categoryData.data.categories.nodes[0].posts.pageInfo;

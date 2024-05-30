@@ -37,8 +37,9 @@ const route = (item, catSlug) => {
   }
 };
 
-const catLinkHome = (item) => {
-  return `/posts/${item.slug}`;
+const catLinkHome = (item, locale) => {
+  const fa = locale === "fa" ? "/fa" : "/en";
+  return `${fa}/posts/${item.slug}`;
 };
 
 const routeMenu = (item) => {

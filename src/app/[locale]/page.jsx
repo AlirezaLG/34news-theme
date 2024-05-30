@@ -76,6 +76,7 @@ const HomePage = async ({ params: { locale } }) => {
           widgetTwoCols={query?.homepage?.twoCols}
           twoColsRight={twoColsRight.nodes}
           widgetTwoColsRight={query?.homepage?.twoColsRight}
+          locale={locale}
         />
       ) : null}
 
@@ -86,6 +87,7 @@ const HomePage = async ({ params: { locale } }) => {
           video2={video2}
           video3={video3}
           widget={query?.homepage?.video}
+          locale={locale}
         />
       ) : null}
 
@@ -94,13 +96,22 @@ const HomePage = async ({ params: { locale } }) => {
         <ThreeCols
           posts={threeCols?.nodes}
           widget={query?.homepage?.threeCols}
+          locale={locale}
         />
       ) : null}
 
       {/* last widget */}
-      <OneCol posts={oneCols?.nodes} widget={query?.homepage?.oneCols} />
+      <OneCol
+        posts={oneCols?.nodes}
+        widget={query?.homepage?.oneCols}
+        locale={locale}
+      />
 
-      <OneCol posts={oneCols2?.nodes} widget={query?.homepage?.oneCols2} />
+      <OneCol
+        posts={oneCols2?.nodes}
+        widget={query?.homepage?.oneCols2}
+        locale={locale}
+      />
     </main>
   );
 };

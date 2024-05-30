@@ -7,6 +7,7 @@ export default function TwoCols({
   widgetTwoCols,
   twoColsRight,
   widgetTwoColsRight,
+  locale,
 }) {
   return (
     <div className="container">
@@ -14,7 +15,7 @@ export default function TwoCols({
         <div className="md:col-span-2 xs:col-span-3">
           <PostTitle
             title={widgetTwoCols?.title}
-            href={catLinkHome(widgetTwoCols?.category.nodes[0])}
+            href={catLinkHome(widgetTwoCols?.category.nodes[0], locale)}
             size={"text-2xl"}
             more={widgetTwoCols?.more}
           />
@@ -23,7 +24,7 @@ export default function TwoCols({
         <div className="md:col-span-1 xs:col-span-3">
           <PostTitle
             title={widgetTwoColsRight?.title}
-            href={catLinkHome(widgetTwoColsRight?.category.nodes[0])}
+            href={catLinkHome(widgetTwoColsRight?.category.nodes[0], locale)}
             size={"text-2xl"}
             more={false}
           />

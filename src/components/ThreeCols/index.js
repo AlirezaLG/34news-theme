@@ -5,12 +5,12 @@ import { catLinkHome } from "@/lib/helpers";
 import Card1 from "../Card1";
 import Single from "../ListNews/single";
 
-export default function ThreeCols({ posts, widget }) {
+export default function ThreeCols({ posts, widget, locale }) {
   return (
     <div className="container mt-10 mb-3">
       <PostTitle
         title={widget?.title}
-        href={catLinkHome(widget?.category.nodes[0])}
+        href={catLinkHome(widget?.category.nodes[0], locale)}
         size={"text-2xl"}
         more={true}
       />

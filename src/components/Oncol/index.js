@@ -3,12 +3,12 @@ import Card1 from "../Card1";
 import PostTitle from "../PostTitle";
 import { catLinkHome } from "@/lib/helpers";
 
-export default function OneCol({ posts, widget }) {
+export default function OneCol({ posts, widget, locale }) {
   return (
     <div className="container">
       <PostTitle
         title={widget?.title}
-        href={catLinkHome(widget?.category.nodes[0])}
+        href={catLinkHome(widget?.category.nodes[0], locale)}
         size={"text-xl"}
         more={true}
       />
