@@ -14,10 +14,10 @@ export default function ({
   // console.log(footer);
   return (
     <div className="bg-primary pt-5">
-      <div className="container py-10 text-white grid md:grid-cols-2 gap-5 xs:grid-cols-1">
+      <div className="container py-6 text-white grid md:grid-cols-2 gap-5 xs:grid-cols-1">
         <div className="grid md:grid-cols-3 xs:grid-cols-1">
           <div className="col-span-2 	">
-            <div className="flex items-center">
+            <div className="flex items-start">
               <Image
                 unoptimized
                 width={70}
@@ -25,11 +25,13 @@ export default function ({
                 style={{ width: "70px", height: "70px" }}
                 src={footer.footerLogo ? footer.footerLogo : "/logo-white.png"}
                 alt={footer.siteTitle}
+                className="mx-3"
               />
-              <h3 className="ms-3 text-xl font-bold">{footer.slogun}</h3>
+              <div className="flex-row">
+                <p className="xpy-5">{footer.footerDescription}</p>
+                <SocialMedia2 socialMedia={socialmedia} />
+              </div>
             </div>
-            <p className="py-5">{footer.footerDescription}</p>
-            <SocialMedia2 socialMedia={socialmedia} />
           </div>
         </div>
         <div className="grid grid-cols-3">
@@ -44,7 +46,6 @@ export default function ({
             className="md:me-auto xs:me-0 "
             dangerouslySetInnerHTML={{ __html: decode(footer?.copyright) }}
           ></span>
-          {"    "}
           <span
             className=""
             dangerouslySetInnerHTML={{ __html: decode(footer.techsharks) }}

@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { decode } from "html-entities";
 import MImage from "../MImage";
-export default function Card1Black({ post, category }) {
+export default function Card1Black({ post, category, locale }) {
   const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
   const videoId = post?.videoLinkGroup?.videoLink?.split("v=")[1].split("&")[0];
 
@@ -43,7 +43,7 @@ export default function Card1Black({ post, category }) {
               {decode(post.title)}
             </h4>
           </Link>
-          <PostDate date={post?.date} themeBlack={true} />
+          <PostDate date={post?.date} themeBlack={true} locale={locale} />
         </div>
       </div>
     </div>

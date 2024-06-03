@@ -3,7 +3,7 @@
 import React from "react";
 import Card1 from "@/components/Card1";
 import PostTitle from "../PostTitle";
-export default function RelatedPost({ posts, widget }) {
+export default function RelatedPost({ posts, widget, locale }) {
   return (
     <div className="grid md:grid-cols-4 xs:grid-cols-1  gap-5">
       {posts.map((post, index) => {
@@ -14,6 +14,7 @@ export default function RelatedPost({ posts, widget }) {
                 post={post}
                 style="text-md font-bold"
                 category={post.categories.nodes[0].slug}
+                locale={locale}
               />
             </div>
           );

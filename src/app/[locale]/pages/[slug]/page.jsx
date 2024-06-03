@@ -12,11 +12,12 @@ import SocialMedia from "@/components/SocialMedia";
 // Dynamic metaData
 export async function generateMetadata({ params: { slug, locale } }) {
   const meta = await getPostGQL(
-    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG),
+    sinlgePageGQL(decodeURIComponent(slug), process.env.NEXT_PUBLIC_HOME_SLUG),
     locale
   );
 
-  const url = process.env.NEXT_PUBLIC_APP_URL + "/pages/" + slug;
+  const url =
+    process.env.NEXT_PUBLIC_APP_URL + "/pages/" + decodeURIComponent(slug);
   return getMetaFromYoast(meta?.data?.main?.edges[0].node?.seo, url);
 }
 
@@ -25,7 +26,7 @@ export default async function SinglePost({ params: { slug, locale } }) {
 
   // this is main page + sidebar info
   const SinglePostData = await getPostGQL(
-    sinlgePageGQL(slug, process.env.NEXT_PUBLIC_HOME_SLUG),
+    sinlgePageGQL(decodeURIComponent(slug), process.env.NEXT_PUBLIC_HOME_SLUG),
     locale
   );
 
@@ -58,12 +59,12 @@ export default async function SinglePost({ params: { slug, locale } }) {
     <div className="container single defaultPage py-8 grid md:grid-cols-3 xs:grid-cols-1 md:gap-5 xs:gap-0">
       <div className={` ${fullW ? "col-span-3 md:mx-52" : "col-span-2"}  `}>
         <h1
-          className="text-4xl "
+          className="text-4xl font-bold "
           dangerouslySetInnerHTML={{ __html: decode(post?.title) }}
         ></h1>
         <p className="pt-3 pb-2">
           <i className="ti-calendar"></i>
-          {formatDateTime(post?.date)}
+          {formatDateTime(post?.date, locale)}
         </p>
         <div
           className="leading-6 content"

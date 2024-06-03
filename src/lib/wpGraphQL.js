@@ -201,6 +201,7 @@ let menuDataGQL = () => {
           whatsappLink
           xTwitterLink
           youtubeLink
+          policyPageID
         }
         menus {
         nodes {
@@ -865,6 +866,7 @@ let homePageGQL = (data) => {
           whatsappLink
           xTwitterLink
           youtubeLink
+          
         }
         pages(where: {name: $home_slug}) {
           edges {

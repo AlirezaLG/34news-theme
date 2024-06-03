@@ -10,7 +10,7 @@ export default function ListNews({ posts, widget, locale }) {
     <React.Fragment>
       <PostTitle size="text-xl" title={widget?.title} />
 
-      <div className="w-full text-gray-900 bg-white rounded-lg pb-4">
+      <div className="w-full text-gray-900 bg-white rounded-lg pb-0">
         {posts && posts.length > 0 ? (
           posts.map((post) => (
             <Single

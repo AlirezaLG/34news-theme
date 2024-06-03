@@ -123,7 +123,6 @@ export default function NavigationMenu({ menu ,header, locale}) {
                                         }
                                       )}
                                     </ul>
-                                  
                                 </li>
                               ) : (
                                 <li key={child.id}>
@@ -159,7 +158,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                   return (
                     // First level menu
                     menuItem.childItems.nodes.length > 0 ? (
-                      <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="dropdownButton text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-md px-5 py-2.5 text-center inline-flex items-center hover:bg-gray-50 md:hover:bg-white  md:hover:text-primary hover:cursor-pointer" type="button">
+                      <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="dropdownButton font-bold text-white  focus:ring-4 focus:outline-none focus:ring-blue-300  text-md px-5 py-2.5 text-center inline-flex items-center hover:bg-gray-50 md:hover:bg-white  md:hover:text-primary hover:cursor-pointer" type="button">
                         {menuItem.label}
                         <svg className="w-2.5 h-2.5 ms-2" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
                           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
@@ -170,7 +169,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                             {menuItem.childItems.nodes.map((child) => {
                               
                               return child.childItems.nodes.length > 0 ? (
-                                <li key={child.id} data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" className=" subdropdownButton flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >
+                                <li key={child.id} data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" className="font-bold subdropdownButton flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >
                                   {child.label}
                                   <svg className="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
@@ -187,7 +186,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                                                     ? grandchild.target
                                                     : ""
                                                 }
-                                                className="flex items-center  text-black px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white "
+                                                className="flex items-center font-bold text-black px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white "
                                               >
                                                 {grandchild.label}
                                               </a>
@@ -200,7 +199,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                                 </li>
                               ) : (
                                 <li key={child.id}>
-                                  <a href={routeMenu(child)} target={child.target ? child.target : ""} className="flex items-center  text-black px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ">
+                                  <a href={routeMenu(child)} target={child.target ? child.target : ""} className="flex items-center  text-black font-bold px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ">
                                     {child.label}
                                   </a>
                                 </li>
@@ -212,7 +211,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                     ) : (
                       // ite does't have any children
                       <li key={menuItem.id}>
-                        <a href={routeMenu(menuItem)} target={menuItem.target ? menuItem.target : ""} className="block py-2  px-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-white  md:border-0 md:hover:text-primary md:py-3  " aria-current="page" >
+                        <a href={routeMenu(menuItem)} target={menuItem.target ? menuItem.target : ""} className="block font-bold py-2  px-4 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-white  md:border-0 md:hover:text-primary md:py-3  " aria-current="page" >
                           {menuItem.label}
                         </a>
                       </li>

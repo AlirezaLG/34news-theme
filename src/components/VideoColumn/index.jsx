@@ -3,14 +3,18 @@ import PostTitleBlack from "../PostTitleBlack";
 import Card1Black from "../Card1Black";
 import Hcard from "../Hcard";
 
-export default function VideoColumn({ posts, category }) {
+export default function VideoColumn({ posts, category, locale }) {
   return (
     <React.Fragment>
       {posts.map((post, index) => {
         if (index < 1) {
           return (
             <React.Fragment key={post.id}>
-              <Card1Black post={post} category={category.slug} />
+              <Card1Black
+                post={post}
+                category={category.slug}
+                locale={locale}
+              />
             </React.Fragment>
           );
         }
@@ -20,7 +24,12 @@ export default function VideoColumn({ posts, category }) {
           if (index > 0) {
             return (
               <React.Fragment key={post.id}>
-                <Hcard post={post} category={category.slug} themeBlack={true} />
+                <Hcard
+                  post={post}
+                  category={category.slug}
+                  themeBlack={true}
+                  locale={locale}
+                />
               </React.Fragment>
             );
           }

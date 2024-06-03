@@ -26,6 +26,7 @@ export default function ThreeCols({ posts, widget, locale }) {
                   content={true}
                   title={"2xl"}
                   imgsize={1}
+                  locale={locale}
                 />
               </React.Fragment>
             );
@@ -43,6 +44,7 @@ export default function ThreeCols({ posts, widget, locale }) {
                     post={post}
                     category={widget?.category?.nodes[0].slug}
                     content={false}
+                    locale={locale}
                   />
                 </React.Fragment>
               );
@@ -62,6 +64,7 @@ export default function ThreeCols({ posts, widget, locale }) {
                     key={post?.id}
                     post={post}
                     category={widget?.category?.nodes[0].slug}
+                    locale={locale}
                   />
                 </React.Fragment>
               );

@@ -99,7 +99,7 @@ export default async function SinglePost({
           {/* {post.videoLinkGroup.videoLink} */}
           <p className="pt-3 pb-2">
             <i className="ti-calendar"></i>
-            {formatDateTime(post?.date)}
+            {formatDateTime(post?.date, locale)}
           </p>
           <div
             className="leading-8 font-normal text-xl content"
@@ -131,14 +131,22 @@ export default async function SinglePost({
           )}
 
           <PostTitle title={relatedWidget?.title} size={"text-lg"} />
-          <RelatedPost posts={related.nodes} widget={relatedWidget} />
+          <RelatedPost
+            posts={related.nodes}
+            widget={relatedWidget}
+            locale={locale}
+          />
         </div>
         <div
           className={` ${
             fullW ? "hidden" : "md:col-span-1 xs:col-span-3 md:ps-8 xs:ps-0"
           } `}
         >
-          <ListNews posts={sidebar.nodes} widget={sidebarWidget} />
+          <ListNews
+            posts={sidebar.nodes}
+            widget={sidebarWidget}
+            locale={locale}
+          />
           <SocialMedia socialMedia={socialMedia} />
         </div>
       </div>

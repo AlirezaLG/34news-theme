@@ -2,6 +2,7 @@ import React from "react";
 import PostTitle from "../PostTitle";
 import Hcards from "../Hcards";
 import { catLinkHome } from "@/lib/helpers";
+import Newsletter from "../Newsletter";
 export default function TwoCols({
   twoCols,
   widgetTwoCols,
@@ -11,7 +12,7 @@ export default function TwoCols({
 }) {
   return (
     <div className="container">
-      <div className="grid md:grid-cols-3 md:gap-5 xs:gap-0 my-5 mb-8">
+      <div className="grid md:grid-cols-3 md:gap-5 xs:gap-0  mb-6">
         <div className="md:col-span-2 xs:col-span-3">
           <PostTitle
             title={widgetTwoCols?.title}
@@ -19,7 +20,12 @@ export default function TwoCols({
             size={"text-2xl"}
             more={widgetTwoCols?.more}
           />
-          <Hcards posts={twoCols} widget={widgetTwoCols} content={true} />
+          <Hcards
+            posts={twoCols}
+            widget={widgetTwoCols}
+            content={true}
+            locale={locale}
+          />
         </div>
         <div className="md:col-span-1 xs:col-span-3">
           <PostTitle
@@ -32,7 +38,9 @@ export default function TwoCols({
             posts={twoColsRight}
             widget={widgetTwoColsRight}
             content={false}
+            locale={locale}
           />
+          <Newsletter />
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { removeHtmlTags } from "@/lib/helpers";
 import { decode } from "html-entities";
 import { LIMIT } from "@/consts";
 
-export default function BigImage({ posts, category }) {
+export default function BigImage({ posts, category, locale }) {
   const cat = category?.category?.nodes[0].slug;
   return (
     <React.Fragment>
@@ -19,7 +19,7 @@ export default function BigImage({ posts, category }) {
         if (index < 1) {
           const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
           return (
-            <div className="col-span-2  mt-5" key={post.id}>
+            <div className="col-span-2  mt-2" key={post.id}>
               <a className=" " href={route(post, cat) || ""}>
                 <MImage post={post} imgsize={0} />
               </a>
@@ -31,9 +31,9 @@ export default function BigImage({ posts, category }) {
                 </Link>
 
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  {removeHtmlTags(limitWords(post?.excerpt, 50))}
+                  {removeHtmlTags(limitWords(post?.excerpt, LIMIT))}
                 </p>
-                <PostDate date={post?.date} />
+                <PostDate date={post?.date} locale={locale} />
               </div>
             </div>
           );

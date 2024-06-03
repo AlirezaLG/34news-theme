@@ -19,8 +19,8 @@ export default function SocialMedia2({ socialMedia }) {
   // console.log("social widget: " + socialMedia);
 
   return (
-    <div>
-      <ul className=" flex flex-row text-white">
+    <React.Fragment>
+      <ul className="mt-3 flex flex-row text-white">
         {socialMedia ? (
           Object.entries(socialMedia).map(([platform, link]) => {
             if (link.length > 0) {
@@ -122,6 +122,6 @@ export default function SocialMedia2({ socialMedia }) {
           <div>{t("No social media setup")} </div>
         )}
       </ul>
-    </div>
+    </React.Fragment>
   );
 }

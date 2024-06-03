@@ -46,7 +46,7 @@ export default async function SearchPage({ params: { locale }, searchParams }) {
       </h1>
       <div className="container grid grid-cols-4 gap-5 category my-10">
         {posts.map((post) => {
-          return <Card1 post={post.node} />;
+          return <Card1 post={post.node} locale={locale} />;
         })}
       </div>
 

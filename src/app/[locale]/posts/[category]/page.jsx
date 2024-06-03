@@ -43,7 +43,7 @@ export default async function CategoryPage({
     <React.Fragment>
       <div className="container grid grid-cols-4 gap-5 category my-10">
         {posts.map((post) => {
-          return <Card1 post={post.node} category={category} />;
+          return <Card1 post={post.node} category={category} locale={locale} />;
         })}
       </div>
 

@@ -10,7 +10,7 @@ import { decode } from "html-entities";
 import { LIMIT2 } from "@/consts";
 import MImage from "../MImage";
 
-const Card1 = ({ post, category, style, content, imgsize = 0 }) => {
+const Card1 = ({ post, category, style, content, imgsize = 0, locale }) => {
   const link = route(post, category);
 
   return (
@@ -29,7 +29,7 @@ const Card1 = ({ post, category, style, content, imgsize = 0 }) => {
               {decode(post?.title)}
             </h4>
           </Link>
-          <PostDate date={post?.date} />
+          <PostDate date={post?.date} locale={locale} />
           {content ? (
             <p
               className="mb-3 xs:hidden md:block font-normal text-gray-700 "

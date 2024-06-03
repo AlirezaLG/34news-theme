@@ -57,31 +57,61 @@ const routeMenu = (item) => {
   }
 };
 
-function formatDateTime(dateTimeString) {
+function formatDateTime(dateTimeString, locale = "en") {
   const now = new Date();
   const date = new Date(dateTimeString);
   const diffInMs = now - date;
-  const diffInHours = diffInMs / (1000 * 60 * 60);
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
 
-  if (diffInHours < 1) {
+  // Define months names for Farsi if locale is 'fa-IR'
+  const months =
+    locale === "fa"
+      ? [
+          "حمل",
+          "ثور",
+          "جوزا",
+          "سرطان",
+          "اسد",
+          "سنبله",
+          "میزان",
+          "عقرب",
+          "قوس",
+          "جدی",
+          "دلو",
+          "حوت",
+        ]
+      : [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+
+  if (diffInMinutes < 60) {
     // Less than 1 hour ago
-    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-    return `${diffInMinutes} minutes ago`;
+    return locale === "fa"
+      ? `${diffInMinutes} دقیقه پیش`
+      : `${diffInMinutes} minutes ago`;
   } else if (diffInHours < 24) {
     // Less than 24 hours ago
-    const diffInHoursRounded = Math.floor(diffInHours);
-    return `${diffInHoursRounded} hours ago`;
+    return locale === "fa"
+      ? `${diffInHours} ساعت پیش`
+      : `${diffInHours} hours ago`;
   } else {
     // More than 24 hours ago
-    const dateObject = new Date(dateTimeString);
-
-    const dateParts = dateTimeString?.split("/");
-    const day = dateObject.getDate();
-    const month = dateObject.getMonth();
-    const year = dateObject.getFullYear();
-    return day + " " + months[month] + ", " + year;
-    // const options = { day: "numeric", month: "long", year: "numeric" };
-    // return date.toLocaleDateString(undefined, options);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    return `${months[month]} ${day}, ${year}`;
   }
 }
 

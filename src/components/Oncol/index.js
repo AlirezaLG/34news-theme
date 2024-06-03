@@ -16,7 +16,11 @@ export default function OneCol({ posts, widget, locale }) {
         {posts.map((post) => {
           return (
             <React.Fragment key={post.id}>
-              <Card1 post={post} category={widget?.category?.nodes[0].slug} />
+              <Card1
+                post={post}
+                category={widget?.category?.nodes[0].slug}
+                locale={locale}
+              />
             </React.Fragment>
           );
         })}

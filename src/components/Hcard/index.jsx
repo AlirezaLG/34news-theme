@@ -5,7 +5,7 @@ import { route, limitWords } from "@/lib/helpers";
 import { decode } from "html-entities";
 import Image from "next/image";
 import { removeHtmlTags } from "@/lib/helpers";
-import { LIMIT } from "@/consts";
+import { LIMIT2 } from "@/consts";
 import MImage from "../MImage";
 export default function Hcard({
   post,
@@ -13,6 +13,7 @@ export default function Hcard({
   content,
   themeBlack,
   imgsize = 0,
+  locale,
 }) {
   const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
   return (
@@ -36,12 +37,12 @@ export default function Hcard({
           >
             {decode(post?.title)}
           </h5>
-          <PostDate date={post?.date} themeBlack={themeBlack} />
+          <PostDate date={post?.date} themeBlack={themeBlack} locale={locale} />
           {content ? (
             <p
               className="mb-3  xs:hidden md:block font-normal text-gray-700 "
               dangerouslySetInnerHTML={{
-                __html: removeHtmlTags(limitWords(post?.excerpt, LIMIT)),
+                __html: removeHtmlTags(limitWords(post?.excerpt, LIMIT2)),
               }}
             ></p>
           ) : (

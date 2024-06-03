@@ -25,6 +25,7 @@ export default function Video({ video1, video2, video3, widget, locale }) {
             <VideoColumn
               posts={video1.nodes}
               category={widget?.col1?.category?.nodes[0]}
+              locale={locale}
             />
           </div>
 
@@ -37,6 +38,7 @@ export default function Video({ video1, video2, video3, widget, locale }) {
             <VideoColumn
               posts={video2.nodes}
               category={widget?.col2?.category?.nodes[0]}
+              locale={locale}
             />
           </div>
 
@@ -49,6 +51,7 @@ export default function Video({ video1, video2, video3, widget, locale }) {
             <VideoColumn
               posts={video3.nodes}
               category={widget?.col3?.category?.nodes[0]}
+              locale={locale}
             />
           </div>
         </div>

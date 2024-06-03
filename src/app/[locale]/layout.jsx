@@ -10,6 +10,9 @@ import CprogressBar from "@/components/CprogressBar";
 import { menuDataGQL } from "@/lib/wpGraphQL";
 import { getDataGQL } from "@/lib/functions";
 import TranslationsProvider from "@/providers/TranslationsProvider";
+import PolicyBanner from "@/components/PolicyBanner";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 // import { LanguageProvider } from "@/providers/LanguageContext";
 const roboto = Noticia_Text({
   subsets: ["latin"],
@@ -48,6 +51,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
     siteDescription: customizer.siteDescription,
     siteUrl: customizer.siteUrl,
   };
+
   // prepare the footer object
   const footer = {
     favIcon: customizer.favIcon,
@@ -74,12 +78,24 @@ const RootLayout = async ({ params: { locale }, children }) => {
     <html dir={`${locale === "en" ? "ltr" : "rtl"}`} lang={locale}>
       <head>
         <link rel="icon" href={footer.favIcon} sizes="32x32" />
+        {/* Google tag (gtag.js)  */}
+        {/* <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-8ZDGPECBYC"
+        ></script>
+        <script>
+          window.dataLayer = window.dataLayer || []; function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()); gtag('config', 'G-8ZDGPECBYC');
+        </script> */}
       </head>
       <body
         className={` 
       ${locale === "en" ? " ltr en " + roboto.className : " rtl fa qalam "}  
   `}
       >
+        <GoogleAnalytics gaId="G-8ZDGPECBYC" />
+
         <TranslationsProvider
           namespaces={["default"]}
           locale={locale}
@@ -101,6 +117,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
             footerMenu2={footerMenu2}
             footerMenu3={footerMenu3}
           />
+          <PolicyBanner locale={locale} url={customizer.policyPageID} />
         </TranslationsProvider>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
       </body>

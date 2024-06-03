@@ -9,7 +9,6 @@ export default function PostTitle({ title, href, size, more }) {
     <div className=" border-b-2 border-primary   px-1 pb-2 mb-5">
       {href ? (
         <Link
-          target="_blank"
           href={href || ""}
           className="text-black flex justify-between hover:text-primary"
         >
@@ -17,9 +16,12 @@ export default function PostTitle({ title, href, size, more }) {
           {more ? <span className="text-sm">{t("more")}</span> : ""}
         </Link>
       ) : (
-        <p className={` ${size ? size : "text-md"} font-bold`}>
+        <Link
+          href=""
+          className={` ${size ? size : "text-md"} text-black font-bold`}
+        >
           {title ? title : t("No Title")}
-        </p>
+        </Link>
       )}
     </div>
   );
