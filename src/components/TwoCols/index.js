@@ -40,7 +40,7 @@ export default function TwoCols({
             content={false}
             locale={locale}
           />
-          <Newsletter />
+          <Newsletter locale={locale} />
         </div>
       </div>
     </div>
