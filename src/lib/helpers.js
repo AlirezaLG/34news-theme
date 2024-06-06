@@ -1,3 +1,5 @@
+import jalaali from "jalaali-js";
+
 const months = [
   "Jan",
   "Feb",
@@ -64,54 +66,65 @@ function formatDateTime(dateTimeString, locale = "en") {
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
   const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
 
-  // Define months names for Farsi if locale is 'fa-IR'
-  const months =
-    locale === "fa"
-      ? [
-          "حمل",
-          "ثور",
-          "جوزا",
-          "سرطان",
-          "اسد",
-          "سنبله",
-          "میزان",
-          "عقرب",
-          "قوس",
-          "جدی",
-          "دلو",
-          "حوت",
-        ]
-      : [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
+  // Define month names for Farsi if locale is 'fa'
+  const monthsFa = [
+    "حمل",
+    "ثور",
+    "جوزا",
+    "سرطان",
+    "اسد",
+    "سنبله",
+    "میزان",
+    "عقرب",
+    "قوس",
+    "جدی",
+    "دلو",
+    "حوت",
+  ];
+
+  // Define month names for English
+  const monthsEn = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   if (diffInMinutes < 60) {
     // Less than 1 hour ago
     return locale === "fa"
-      ? `${diffInMinutes} دقیقه پیش`
+      ? `${diffInMinutes.toLocaleString("fa-IR", {
+          useGrouping: false,
+        })} دقیقه پیش`
       : `${diffInMinutes} minutes ago`;
   } else if (diffInHours < 24) {
     // Less than 24 hours ago
     return locale === "fa"
-      ? `${diffInHours} ساعت پیش`
+      ? `${diffInHours.toLocaleString("fa-IR", {
+          useGrouping: false,
+        })} ساعت پیش`
       : `${diffInHours} hours ago`;
   } else {
     // More than 24 hours ago
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    return `${months[month]} ${day}, ${year}`;
+    if (locale === "fa") {
+      const { jy, jm, jd } = jalaali.toJalaali(date);
+      return `${monthsFa[jm - 1]} ${jd.toLocaleString("fa-IR", {
+        useGrouping: false,
+      })}, ${jy.toLocaleString("fa-IR", { useGrouping: false })}`;
+    } else {
+      const day = date.getDate();
+      const month = date.getMonth();
+      const year = date.getFullYear();
+      return `${monthsEn[month]} ${day}, ${year}`;
+    }
   }
 }
 

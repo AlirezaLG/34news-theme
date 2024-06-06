@@ -28,7 +28,11 @@ export default function SocialMedia({ socialMedia }) {
                 <React.Fragment key={platform}>
                   {platform === "facebook" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaFacebook size={24} className="facebook text-xlg" />
                       </Link>
                     </li>
@@ -36,7 +40,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "xTwitter" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaXTwitter size={24} className="twitterx text-xlg" />
                       </Link>
                     </li>
@@ -44,7 +52,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "youtube" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaYoutube size={24} className="youtube text-xlg" />
                       </Link>
                     </li>
@@ -52,7 +64,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "instagram" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaInstagram size={24} className="instagram text-xlg" />
                       </Link>
                     </li>
@@ -60,7 +76,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "linkedin" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaLinkedin size={24} className="linkedin text-xlg" />
                       </Link>
                     </li>
@@ -68,7 +88,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "whatsapp" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaWhatsapp size={24} className="whatsapp text-xlg" />
                       </Link>
                     </li>
@@ -76,7 +100,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "telegram" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaTelegram size={24} className="telegram text-xlg" />
                       </Link>
                     </li>
@@ -84,7 +112,11 @@ export default function SocialMedia({ socialMedia }) {
 
                   {platform === "tiktok" && (
                     <li className="px-1">
-                      <Link className="pt-1 px-1 block" href={link}>
+                      <Link
+                        target="_blank"
+                        className="pt-1 px-1 block"
+                        href={link}
+                      >
                         <FaTiktok size={24} className="tiktok text-xlg" />
                       </Link>
                     </li>

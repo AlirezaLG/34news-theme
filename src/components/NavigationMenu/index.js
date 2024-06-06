@@ -221,8 +221,11 @@ export default function NavigationMenu({ menu ,header, locale}) {
               })}
             </ul>
           </div>
-          <SearchMenu />
-          <div className="xs:ms-auto md:ms-0 ps-0 pe-3">
+          <div className="xs:hidden md:block xs:ms-0 md:ms-auto">
+          <SearchMenu  />
+          </div>
+          
+          <div className=" md:ms-0 ps-0 pe-3">
             <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-sm md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
               <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14" >
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />

@@ -85,22 +85,22 @@ export default async function SinglePost({
         </div>
       )}
 
-      <div className="container single py-8 grid grid-cols-3 gap-5">
+      <div className="container single py-7 grid grid-cols-3 gap-5">
         <div
           className={` ${
             fullW ? "col-span-3 md:mx-52 " : "md:col-span-2 xs:col-span-3"
           } `}
         >
-          {isEmptyDefault && <MImage post={post} imgsize={0} imgClass="mb-4" />}
           <h1
-            className="text-4xl font-bold"
+            className="md:text-3xl xs:text-2xl font-bold"
             dangerouslySetInnerHTML={{ __html: decode(post?.title) }}
           ></h1>
           {/* {post.videoLinkGroup.videoLink} */}
-          <p className="pt-3 pb-2">
+          <p className="py-3 ">
             <i className="ti-calendar"></i>
             {formatDateTime(post?.date, locale)}
           </p>
+          {isEmptyDefault && <MImage post={post} imgsize={0} imgClass="mb-4" />}
           <div
             className="leading-8 font-normal text-xl content"
             dangerouslySetInnerHTML={{ __html: decode(post?.content) }}

@@ -12,6 +12,7 @@ import { getDataGQL } from "@/lib/functions";
 import TranslationsProvider from "@/providers/TranslationsProvider";
 import PolicyBanner from "@/components/PolicyBanner";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import BackToTop from "@/components/BackToTop";
 
 // import { LanguageProvider } from "@/providers/LanguageContext";
 const roboto = Noticia_Text({
@@ -118,6 +119,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
             footerMenu3={footerMenu3}
           />
           <PolicyBanner locale={locale} url={customizer.policyPageID} />
+          <BackToTop />
         </TranslationsProvider>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
       </body>

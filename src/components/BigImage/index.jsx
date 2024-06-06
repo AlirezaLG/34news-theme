@@ -20,12 +20,12 @@ export default function BigImage({ posts, category, locale }) {
           const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
           return (
             <div className="col-span-2  mt-2" key={post.id}>
-              <a className=" " href={route(post, cat) || ""}>
+              <Link href={route(post, cat) || ""}>
                 <MImage post={post} imgsize={0} />
-              </a>
+              </Link>
               <div className="py-4 px-2 ">
                 <Link href={route(post, cat) || ""}>
-                  <h2 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 hover:text-primary">
+                  <h2 className="mb-2 md:text-3xl xs:text-2xl font-bold tracking-tight text-gray-900 hover:text-primary">
                     {decode(post?.title)}
                   </h2>
                 </Link>

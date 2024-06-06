@@ -6,7 +6,7 @@ import NavigationMenu from "../NavigationMenu";
 // import { useLanguage } from "@/providers/LanguageContext";
 import initTranslations from "../../i18n";
 import { useRouter } from "next/navigation";
-
+import SearchMenu from "../SearchMenu";
 export default function Header({
   primaryMenu,
   topMenu,
@@ -40,8 +40,8 @@ export default function Header({
               // style={{ width: "auto", height: "auto" }}
             />
           </Link>
-          <ul className="ms-auto me-5 flex pt-6">
-            <li className="px-3   ">
+          <ul className="ms-auto flex pt-6">
+            <li className="px-3">
               <button
                 onClick={handleClick}
                 className="pt-1 text-xs hover:text-primary text-gray-800"
@@ -49,7 +49,9 @@ export default function Header({
                 {locale === "en" ? "فارسی" : "English"}
               </button>
             </li>
-            <li className="px-3"></li>
+            <li className="px-3 md:hidden xs:block md:ms-auto xs:ms-0">
+              <SearchMenu />
+            </li>
           </ul>
         </di>
       </div>

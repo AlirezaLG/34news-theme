@@ -29,6 +29,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "facebook" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -40,6 +41,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "xTwitter" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -51,6 +53,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "youtube" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -62,6 +65,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "instagram" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -73,6 +77,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "linkedin" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -84,6 +89,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "whatsapp" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -95,6 +101,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "telegram" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >
@@ -106,6 +113,7 @@ export default function SocialMedia2({ socialMedia }) {
                   {platform === "tiktok" && (
                     <li className="px-1">
                       <Link
+                        target="_blank"
                         className="pt-1 px-1 block hover:text-gray-900"
                         href={link}
                       >

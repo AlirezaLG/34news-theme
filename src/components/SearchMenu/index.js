@@ -23,7 +23,7 @@ export default function SearchMenu() {
         className=""
         type="button"
       >
-        <IoSearchOutline size={24} color="white" className="mt-3" />
+        <IoSearchOutline size={24}  className="xs:stroke-primary md:stroke-white md:mt-3 xs:mt-0 " />
       </button>
 
       <div 

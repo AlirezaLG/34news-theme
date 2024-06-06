@@ -34,7 +34,7 @@ export default function Sharing({ post, category = null }) {
       <p className="pe-3 pt-1">{t("Sharing on social media")}</p>
       <ul className="flex ">
         <li className="float-none pe-2">
-          <FacebookShareButton url={url} quote={post?.title}>
+          <FacebookShareButton url={url} title={post?.title}>
             <FacebookIcon size={32} round />
           </FacebookShareButton>
         </li>
