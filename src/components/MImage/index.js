@@ -4,7 +4,8 @@ import Image from "next/image";
 export default function MImage({ post, imgsize, imgClass = "" }) {
   // console.log(post?.featuredImage?.node?.mediaDetails);
   // const imageSize = imgsize ? imgsize : 0;
-  const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[0] || "";
+  // console.log(post?.featuredImage?.node?.mediaDetails?.sizes);
+  const img = post?.featuredImage?.node?.mediaDetails?.sizes?.[imgsize] || "";
 
   return (
     <React.Fragment>

@@ -62,11 +62,12 @@ const routeMenu = (item) => {
 function formatDateTime(dateTimeString, locale = "en") {
   const now = new Date();
   const date = new Date(dateTimeString);
+
   const diffInMs = now - date;
-  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  const diffInSeconds = Math.floor(diffInMs / 1000);
+  var diffInMinutes = Math.floor(diffInMs / (1000 * 60));
   const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
 
-  // Define month names for Farsi if locale is 'fa'
   const monthsFa = [
     "حمل",
     "ثور",
@@ -82,7 +83,6 @@ function formatDateTime(dateTimeString, locale = "en") {
     "حوت",
   ];
 
-  // Define month names for English
   const monthsEn = [
     "Jan",
     "Feb",
@@ -99,21 +99,21 @@ function formatDateTime(dateTimeString, locale = "en") {
   ];
 
   if (diffInMinutes < 60) {
-    // Less than 1 hour ago
+    if (diffInMinutes === 0) {
+      diffInMinutes = 1;
+    }
     return locale === "fa"
       ? `${diffInMinutes.toLocaleString("fa-IR", {
           useGrouping: false,
         })} دقیقه پیش`
       : `${diffInMinutes} minutes ago`;
   } else if (diffInHours < 24) {
-    // Less than 24 hours ago
     return locale === "fa"
       ? `${diffInHours.toLocaleString("fa-IR", {
           useGrouping: false,
         })} ساعت پیش`
       : `${diffInHours} hours ago`;
   } else {
-    // More than 24 hours ago
     if (locale === "fa") {
       const { jy, jm, jd } = jalaali.toJalaali(date);
       return `${monthsFa[jm - 1]} ${jd.toLocaleString("fa-IR", {

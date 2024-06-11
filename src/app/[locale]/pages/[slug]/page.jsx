@@ -114,7 +114,6 @@ export default async function SinglePost({ params: { slug, locale } }) {
           </div>
         )}
         <br />
-        <Sharing post={post} />
       </div>
       <div className={` ${fullW ? "hidden" : "col-span-1 md:ps-8 xs:ps-0"}  `}>
         <ListNews posts={sidebar.nodes} widget={sidebarWidget} />

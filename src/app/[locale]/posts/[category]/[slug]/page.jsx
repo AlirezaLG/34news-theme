@@ -36,6 +36,7 @@ export default async function SinglePost({
     locale
   );
   const post = SinglePostData.data.postBy;
+  // console.log(post?.featuredImage?.node?.mediaDetails?.sizes);
 
   // add tags widget layout to list the related posts
   if (SinglePostData.data.pages.edges[0].node.singlePost.related) {
@@ -96,11 +97,11 @@ export default async function SinglePost({
             dangerouslySetInnerHTML={{ __html: decode(post?.title) }}
           ></h1>
           {/* {post.videoLinkGroup.videoLink} */}
-          <p className="py-3 ">
+          <p className="py-3 " suppressHydrationWarning>
             <i className="ti-calendar"></i>
             {formatDateTime(post?.date, locale)}
           </p>
-          {isEmptyDefault && <MImage post={post} imgsize={0} imgClass="mb-4" />}
+          {isEmptyDefault && <MImage post={post} imgsize={1} imgClass="mb-4" />}
           <div
             className="leading-8 font-normal text-xl content"
             dangerouslySetInnerHTML={{ __html: decode(post?.content) }}
