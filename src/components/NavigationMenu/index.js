@@ -75,6 +75,8 @@ export default function NavigationMenu({ menu ,header, locale}) {
         
          className="flex flex-wrap items-start  max-w-screen-xl  ">
 
+          
+
           {/* mobile only drawer */}
           <div id="drawer-navigation" className={` ${ locale==='en'? '-translate-x-full left-0' : 'translate-x-full right-0' } xs:block md:hidden fixed  transition-transform  top-0 z-40 w-64 h-screen p-4 overflow-y-auto  bg-white dark:bg-gray-800`} tabIndex="-1" aria-labelledby="drawer-navigation-label" >
             <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"  >
@@ -149,16 +151,26 @@ export default function NavigationMenu({ menu ,header, locale}) {
               </ul>
             </div>
           </div>
-
+          
+          
+          
           {/* desktop only  */}
-          <div id="mega-menu" className="xs:hidden items-center justify-between hidden w-full md:flex md:w-auto " >
-            <ul className="flex flex-col  mt-4 font-medium md:flex-row md:mt-0 md:space-x-0 rtl:space-x-reverse">
+          <div id="mega-menu" className="overflow-scroll	 items-center justify-between w-full md:flex md:w-auto " >
+          
+            <ul className="flex   font-medium md:flex-row md:mt-0 md:space-x-0 rtl:space-x-reverse">
+            <div className=" md:ms-0 ps-0 pe-3 d-inline">
+            <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-sm md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
+              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14" >
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+              </svg>
+            </button>
+          </div>
               {menu.menuItems.nodes.map((menuItem) => {
                 if (!menuItem.parentId) {
                   return (
                     // First level menu
                     menuItem.childItems.nodes.length > 0 ? (
-                      <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="dropdownButton font-bold text-white  focus:ring-4 focus:outline-none focus:ring-blue-300  text-md px-5 py-2.5 text-center inline-flex items-center hover:bg-gray-50 md:hover:bg-white  md:hover:text-primary hover:cursor-pointer" type="button">
+                      <li key={menuItem.id} data-dropdown-toggle="dropdownMenu" className="flex dropdownButton font-bold text-white  focus:ring-4 focus:outline-none focus:ring-blue-300  text-md px-5 py-2.5 text-center whitespace-nowrap items-center hover:bg-gray-50  hover:text-primary hover:cursor-pointer" type="button">
                         {menuItem.label}
                         <svg className="w-2.5 h-2.5 ms-2" aria-hidden="true" fill="none" viewBox="0 0 10 6" >
                           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
@@ -211,7 +223,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                     ) : (
                       // ite does't have any children
                       <li key={menuItem.id}>
-                        <a href={routeMenu(menuItem)} target={menuItem.target ? menuItem.target : ""} className="block font-bold py-2  px-4 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-white  md:border-0 md:hover:text-primary md:py-3  " aria-current="page" >
+                        <a href={routeMenu(menuItem)} target={menuItem.target ? menuItem.target : ""} className="block font-bold py-2  px-4 text-white  hover:bg-gray-50  hover:text-primary md:py-3  " aria-current="page" >
                           {menuItem.label}
                         </a>
                       </li>
@@ -225,13 +237,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
           <SearchMenu  />
           </div>
           
-          <div className=" md:ms-0 ps-0 pe-3">
-            <button className="inline-flex items-end p-2 w-10 h-10 justify-center text-sm text-white rounded-sm md:hidden " type="button" data-drawer-backdrop="true"  data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation" >
-              <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14" >
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-              </svg>
-            </button>
-          </div>
+          
 
           
         </div>

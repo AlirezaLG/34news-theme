@@ -1,5 +1,5 @@
 {
-  "home": "Home 2",
+  "home": "Home",
   "No posts available":"No posts available",
   "No social media setup":"No social media setup",
   "more": "More",
@@ -37,9 +37,7 @@
   "Submit": "Submit",
   
 
-  "backToHome": "Back to home",
-  "donateNow": "Donate Now",
-  "byName": "By {{name}}",
+  
   "categories": "Categories",
   "recentPosts": "Recent posts",
   "tags": "Tags",

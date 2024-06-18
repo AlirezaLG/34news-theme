@@ -12,7 +12,7 @@ import SocialMedia from "@/components/SocialMedia";
 import MImage from "@/components/MImage";
 import { setDefaultNamespace } from "i18next";
 import AuthorBox from "@/components/AuthorBox";
-
+import Breadcrumb from "@/components/Breadcrumb";
 // Dynamic metaData
 export async function generateMetadata({ params: { category, slug, locale } }) {
   const meta = await getPostGQL(
@@ -67,7 +67,7 @@ export default async function SinglePost({
   const videoId = post?.videoLinkGroup?.videoLink?.split("v=")[1].split("&")[0];
   const fullW =
     post?.postFormats?.nodes?.[0]?.slug === "post-format-status" || null;
-
+  // console.log(post?.categories.edges);
   return (
     <React.Fragment>
       {post?.postFormats?.nodes?.[0]?.slug === "post-format-video" && (
@@ -92,6 +92,11 @@ export default async function SinglePost({
             fullW ? "col-span-3 md:mx-52 " : "md:col-span-2 xs:col-span-3"
           } `}
         >
+          <Breadcrumb
+            locale={locale}
+            category={post?.categories.edges}
+            slug={category}
+          />
           <h1
             className="md:text-3xl xs:text-2xl font-bold"
             dangerouslySetInnerHTML={{ __html: decode(post?.title) }}

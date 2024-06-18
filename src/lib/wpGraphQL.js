@@ -560,6 +560,7 @@ let sinlgePostGQL = (slug, home_slug) => {
               isPrimary
               node {
                 name
+                slug
               }
             }
           }
