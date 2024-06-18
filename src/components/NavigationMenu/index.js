@@ -223,7 +223,7 @@ export default function NavigationMenu({ menu ,header, locale}) {
                     ) : (
                       // ite does't have any children
                       <li key={menuItem.id}>
-                        <a href={routeMenu(menuItem)} target={menuItem.target ? menuItem.target : ""} className="block font-bold py-2  px-4 text-white  hover:bg-gray-50  hover:text-primary md:py-3  " aria-current="page" >
+                        <a href={routeMenu(menuItem)} target={menuItem.target ? menuItem.target : ""} className="block font-bold py-2 whitespace-nowrap px-4 text-white  hover:bg-gray-50  hover:text-primary md:py-3  " aria-current="page" >
                           {menuItem.label}
                         </a>
                       </li>
