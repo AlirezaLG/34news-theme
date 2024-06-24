@@ -34,14 +34,14 @@
   "Email": "ایمیل",
   "Subject": "عنوان",
   "Your Message": "پیام شما",
-  "Submit": "ارسال",
+  "Category": "بخش",
 
   "backToHome": "بازکشت به صفحه اصلی",
   "categories": "بخش ها",
   "recentPosts": "مطالب اخیر",
   "tags": "تگ",
   "search": "جستجو",
-  "searchPost": "جستجوی مطلب",
+  "Search Result for": "نتیجه جستجو برای",
   "nextPost": "مطلب بعدی",
   "prevPost": "مطلب قبلی",
   "sorryNothingFound": "چیزی یافت نشد"

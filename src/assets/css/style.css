@@ -9,6 +9,15 @@ a:hover{
     color:var(primary);
     color: primary;
 }
+.shark-menu::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+.shark-menu{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+}
+
 /* WordPress Core
 -------------------------------------------------------------- */
 .alignnone {

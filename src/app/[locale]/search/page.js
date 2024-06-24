@@ -42,7 +42,7 @@ export default async function SearchPage({ params: { locale }, searchParams }) {
   return (
     <React.Fragment>
       <h1 className="text-start container mt-8 text-3xl">
-        {t("Search Result for: ") + searchParams.s}
+        {t("Search Result for") + " : " + searchParams.s}
       </h1>
       <div className="container grid grid-cols-4 gap-5 category my-10">
         {posts.map((post) => {

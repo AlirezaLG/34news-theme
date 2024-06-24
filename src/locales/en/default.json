@@ -35,6 +35,7 @@
   "Subject": "Subject",
   "Your Message": "Your Message",
   "Submit": "Submit",
+  "Category": "Category",
   
 
   
@@ -47,6 +48,6 @@
   "nextPost": "Next post",
   "prevPost": "Prev post",
   "memeberShipForm": "Membership Form",
-  "searchFor": "Search for : {{value}}",
+  "Search Result for": "Search Result for",
   "sorryNothingFound": "Sorry! Nothing found."
 }

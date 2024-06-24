@@ -41,29 +41,36 @@ export default async function CategoryPage({
 
   return (
     <React.Fragment>
-      <div className="container grid md:grid-cols-4 xs:grid-cols-1  md:gap-5 xs:gap-0  category my-10">
-        {posts.map((post) => {
-          return <Card1 post={post.node} category={category} locale={locale} />;
-        })}
-      </div>
+      <div className="container category my-5">
+        <h3 className="my-5  text-2xl font-bold">
+          {t("Category") + " : " + decodeURIComponent(category)}
+        </h3>
+        <div className=" grid md:grid-cols-4 xs:grid-cols-1  md:gap-5 xs:gap-0  ">
+          {posts.map((post) => {
+            return (
+              <Card1 post={post.node} category={category} locale={locale} />
+            );
+          })}
+        </div>
 
-      <div className="pagination text-center my-5 space-x-3">
-        {prevPageUrl && (
-          <a
-            href={prevPageUrl}
-            className="prev-page text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  "
-          >
-            {t("Previous Page")}
-          </a>
-        )}
-        {nextPageUrl && (
-          <a
-            href={nextPageUrl}
-            className="next-page text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  "
-          >
-            {t("Next Page")}
-          </a>
-        )}
+        <div className="pagination text-center my-5 space-x-3">
+          {prevPageUrl && (
+            <a
+              href={prevPageUrl}
+              className="prev-page text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  "
+            >
+              {t("Previous Page")}
+            </a>
+          )}
+          {nextPageUrl && (
+            <a
+              href={nextPageUrl}
+              className="next-page text-white bg-blue-700 hover:bg-blue-800   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  "
+            >
+              {t("Next Page")}
+            </a>
+          )}
+        </div>
       </div>
     </React.Fragment>
   );
