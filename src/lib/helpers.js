@@ -1,5 +1,13 @@
 import jalaali from "jalaali-js";
 
+function sanitizeId(id) {
+  // Ensure id is a string and contains only digits
+  if (typeof id === "string" && id.trim().length > 0 && /^\d+$/.test(id)) {
+    return id.trim();
+  }
+  return null;
+}
+
 const months = [
   "Jan",
   "Feb",
@@ -201,4 +209,5 @@ export {
   routeMenu,
   limitWords,
   catLinkHome,
+  sanitizeId,
 };

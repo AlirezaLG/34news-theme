@@ -28,7 +28,7 @@ const RootLayout = async ({ params: { locale }, children }) => {
     locale
   );
 
-  console.log(customizer);
+  // console.log(customizer);
   // prepare the social media object
   const socialmedia = {
     facebook: customizer.facebookLink,

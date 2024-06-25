@@ -35,6 +35,10 @@
   "Subject": "عنوان",
   "Your Message": "پیام شما",
   "Category": "بخش",
+  "You have already submitted. you can't submit multiple times": "شما یکبار رای داده اید، مجددا رای داده نمیتانید",
+  "Failed to vote": "رای شما ثبت نشد",
+  "Vote Submitted successfully": "رای شما موفقانه ثبت شد",
+  "An error occurred. Please try again": "خطا رخ داد، لطفا مجددا کوشش کنید.",
 
   "backToHome": "بازکشت به صفحه اصلی",
   "categories": "بخش ها",

@@ -36,6 +36,10 @@
   "Your Message": "Your Message",
   "Submit": "Submit",
   "Category": "Category",
+  "You have already submitted. you can't submit multiple times": "You have already submitted. you can't submit multiple times",
+  "Failed to vote": "Failed to vote",
+  "Vote Submitted successfully": "Vote Submitted successfully",
+  "An error occurred. Please try again": "An error occurred. Please try again",
   
 
   

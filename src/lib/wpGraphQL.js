@@ -1,3 +1,99 @@
+let frmlistGQL = (id) => {
+  return JSON.stringify({
+    query: `query getfrms{
+      formidableForms(id: "${id}") {
+        id
+        title
+        description
+        fields {
+          required
+          type
+          options
+          name
+          id
+          defaultValue
+        }
+      }
+    }`,
+  });
+};
+
+// find author by id
+let AuthorGQL = (author, ppp, param) => {
+  // Determine cursor based on direction
+  let cursorNext = "";
+  let cursorPrev = "";
+  let firstPP = 0;
+  let prevPP = 0;
+  if (param.p === "next") {
+    cursorNext = param.cursor;
+    firstPP = ppp;
+  } else if (param.p === "prev") {
+    cursorPrev = param.cursor;
+    prevPP = ppp;
+  } else {
+    firstPP = ppp;
+  }
+
+  return JSON.stringify({
+    query: `query author( 
+    $after: String = "${cursorNext}", 
+    $before: String = "${cursorPrev}", 
+    $first: Int = ${firstPP}, 
+    $last: Int = ${prevPP}, 
+    $author: Int = ${author}
+    ) {
+      customUser(userId: $author) {
+        userId
+        description
+        displayName
+        authorTitle
+        userImage
+      }
+      posts(where: {author: $author, orderby: {field: DATE, order: DESC}}, first: $first, after: $after, last: $last , before: $before) {
+        pageInfo {
+          endCursor
+          hasNextPage
+          startCursor
+          hasPreviousPage
+        }
+        edges {
+          node {
+            id
+            title
+            date
+            link
+            slug
+            categories{
+              edges{
+                isPrimary
+                node{
+                  name
+                  slug
+                  termTaxonomyId
+                }
+              }
+            }
+            contentTypeName
+            featuredImage {
+              node {
+                mediaDetails {
+                  sizes(include: [MEDIUM]) {
+                    sourceUrl
+                    width
+                    height
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    
+}`,
+  });
+};
+
 let tagGQL = (tag, ppp, param) => {
   // Determine cursor based on direction
   let cursorNext = "";
@@ -524,12 +620,13 @@ let sinlgePostGQL = (slug, home_slug) => {
           author {
             node {
               id
+              userId
               name
               email
               description
               authorImage {
                 authortitle
-                authorImage {
+                userImage {
                   node {
                     mediaItemUrl
                   }
@@ -1053,4 +1150,6 @@ export {
   categoryGQL,
   searchGQL,
   tagGQL,
+  AuthorGQL,
+  frmlistGQL,
 };

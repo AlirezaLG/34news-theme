@@ -10,7 +10,8 @@ import initTranslations from "@/i18n";
 import Sharing from "@/components/Sharing";
 import SocialMedia from "@/components/SocialMedia";
 import MImage from "@/components/MImage";
-import { setDefaultNamespace } from "i18next";
+import { JSDOM } from "jsdom";
+import Polling from "@/components/Polling";
 import AuthorBox from "@/components/AuthorBox";
 import Breadcrumb from "@/components/Breadcrumb";
 // Dynamic metaData
@@ -20,9 +21,12 @@ export async function generateMetadata({ params: { category, slug, locale } }) {
     locale
   );
 
-  // console.log(sinlgePostGQL(decode(slug), process.env.NEXT_PUBLIC_HOME_SLUG));
   const url =
-    process.env.NEXT_PUBLIC_APP_URL + "/posts/" + category + "/" + slug;
+    process.env.NEXT_PUBLIC_APP_URL +
+    "/posts/" +
+    decodeURIComponent(category) +
+    "/" +
+    slug;
   return getMetaFromYoast(meta.data.postBy.seo, url);
 }
 
@@ -68,6 +72,11 @@ export default async function SinglePost({
   const fullW =
     post?.postFormats?.nodes?.[0]?.slug === "post-format-status" || null;
   // console.log(post?.categories.edges);
+
+  const [cleanedContent, formId] = post.content
+    ? parseAndCleanHTML(post.content)
+    : "";
+
   return (
     <React.Fragment>
       {post?.postFormats?.nodes?.[0]?.slug === "post-format-video" && (
@@ -85,7 +94,6 @@ export default async function SinglePost({
           </div>
         </div>
       )}
-
       <div className="container single py-7 grid grid-cols-3 gap-5">
         <div
           className={` ${
@@ -107,13 +115,15 @@ export default async function SinglePost({
             {formatDateTime(post?.date, locale)}
           </p>
           {isEmptyDefault && <MImage post={post} imgsize={1} imgClass="mb-4" />}
+
           <div
             className="leading-8 font-normal text-xl content"
-            dangerouslySetInnerHTML={{ __html: decode(post?.content) }}
+            dangerouslySetInnerHTML={{ __html: decode(cleanedContent) }}
           ></div>
+          {formId && <Polling formId={formId} locale={locale} />}
           <br />
           {post?.single?.showAuthor && (
-            <AuthorBox author={post?.author?.node} />
+            <AuthorBox author={post?.author?.node} locale={locale} />
           )}
 
           <br />
@@ -158,4 +168,20 @@ export default async function SinglePost({
       </div>
     </React.Fragment>
   );
+}
+
+function parseAndCleanHTML(htmlContent) {
+  const dom = new JSDOM(htmlContent);
+  const document = dom.window.document;
+
+  // Extract the form_id
+  const formIdInput = document.querySelector('input[name="form_id"]');
+  const formId = formIdInput ? formIdInput.value : null;
+  // console.log("Extracted Form ID:", formId); // Log or handle the formId as needed
+
+  // Remove elements by class name
+  const elementsToRemove = document.querySelectorAll(".frm_forms");
+  elementsToRemove.forEach((element) => element.remove());
+
+  return [document.body.innerHTML, formId]; // Return the modified HTML
 }
