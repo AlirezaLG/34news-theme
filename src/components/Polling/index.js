@@ -110,7 +110,7 @@ const Polling = ({ formId, locale }) => {
             return (
               <div key={field.id}>
                 <h4 className="text-xl lg:text-2xl font-semibold">
-                  {field.label}
+                  {field.name}
                 </h4>
                 {field.options.map((option, index) => (
                   <label
@@ -132,7 +132,7 @@ const Polling = ({ formId, locale }) => {
             return (
               <div key={field.id}>
                 <h4 className="text-xl lg:text-2xl font-semibold">
-                  {field.label}
+                  {field.name}
                 </h4>
                 {field.options.map((option, index) => (
                   <label
