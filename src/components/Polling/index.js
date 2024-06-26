@@ -21,7 +21,7 @@ const Polling = ({ formId, locale }) => {
     fetchData();
   }, [formId, locale]);
 
-  if (!form) return <div>Loading...</div>; // Show a loading state while the data is being fetched
+  if (!form) return <div>{t("Loading...")}</div>; // Show a loading state while the data is being fetched
 
   const CREATE_FORM_ENTRY = `
   mutation createFormEntry($formId: ID!, $fields: [FieldInput!]!) {
@@ -37,7 +37,9 @@ const Polling = ({ formId, locale }) => {
     setLoading(true);
     setError(null);
 
-    const lastSubmissionTime = localStorage.getItem("lastSubmissionTime");
+    const lastSubmissionTime = localStorage.getItem(
+      "lastSubmissionTime" + formId
+    );
     const now = new Date().getTime();
 
     if (lastSubmissionTime && now - lastSubmissionTime < SUBMISSION_DELAY) {
@@ -61,7 +63,7 @@ const Polling = ({ formId, locale }) => {
       formId: formId.toString(), // Ensure formId is a string
       fields: fieldData,
     };
-    console.log(variables); // Debug: Check the structure of the variables
+    // console.log(variables); // Debug: Check the structure of the variables
 
     const url =
       locale === "fa"
@@ -87,7 +89,7 @@ const Polling = ({ formId, locale }) => {
         setError(result.errors[0].message);
       } else if (result.data.createFormEntry.success) {
         setMessage(t("Vote Submitted successfully"));
-        localStorage.setItem("lastSubmissionTime", now.toString());
+        localStorage.setItem("lastSubmissionTime" + formId, now.toString());
       } else {
         setMessage(t("Failed to vote"));
       }

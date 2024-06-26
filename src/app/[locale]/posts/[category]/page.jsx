@@ -43,7 +43,7 @@ export default async function CategoryPage({
     <React.Fragment>
       <div className="container category my-5">
         <h3 className="my-5  text-2xl font-bold">
-          {t("Category") + " : " + decodeURIComponent(category)}
+          {decodeURIComponent(category)}
         </h3>
         <div className=" grid md:grid-cols-4 xs:grid-cols-1  md:gap-5 xs:gap-0  ">
           {posts.map((post) => {
