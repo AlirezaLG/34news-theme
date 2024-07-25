@@ -18,15 +18,15 @@ export default function Sharing({ post, category = null, locale }) {
       process.env.NEXT_PUBLIC_APP_URL +
       locale +
       "/posts/" +
-      encodeURIComponent(category) +
+      decodeURIComponent(category) +
       "/" +
-      encodeURIComponent(post?.slug);
+      decodeURIComponent(post?.slug);
   } else {
     url =
       process.env.NEXT_PUBLIC_APP_URL +
       locale +
       "/page/" +
-      encodeURIComponent(post?.slug);
+      decodeURIComponent(post?.slug);
   }
 
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ export default function Sharing({ post, category = null, locale }) {
   const openInNewTab = (url) => {
     window.open(url, "_blank");
   };
-  console.log(encodeURIComponent(url));
+  console.log(url);
   const handleFacebookClick = () => {
     const shareUrl = `http://www.facebook.com/share.php?u=${url}`;
     openInNewTab(shareUrl);
@@ -44,35 +44,35 @@ export default function Sharing({ post, category = null, locale }) {
   // https://www.facebook.com/share_channel/?link=https%3A%2F%2F34news.com%2Fposts%2F%25D8%25AE%25D8%25A8%25D8%25B1-%25D8%25A7%25D8%25B5%25D9%2584%25DB%258C%2F%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DA%AF%D8%B1%D9%85%D8%A7-%D8%AF%D8%B1%D9%87%D9%86%D8%AF%D8%9B-%D8%A8%DB%8C%D8%B4-%D8%A7%D8%B2-%D8%AF%D9%88%D8%B5%D8%AF-%D8%AA%D9%86-%D8%AC%D8%A7%D9%86&app_id=966242223397117&source_surface=external_reshare&display&hashtag
 
   const handleTwitterClick = () => {
-    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${encodeURIComponent(
+    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${decodeURIComponent(
       post?.title
     )}`;
     openInNewTab(shareUrl);
   };
 
   const handleLinkedInClick = () => {
-    const shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-      url
-    )}&title=${encodeURIComponent(post?.title)}`;
+    const shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${decodeURIComponent(
+      post?.title
+    )}`;
     openInNewTab(shareUrl);
   };
 
   const handleEmailClick = () => {
-    const subject = encodeURIComponent(post?.title);
-    const body = encodeURIComponent(`Check out this link: ${url}`);
+    const subject = decodeURIComponent(post?.title);
+    const body = decodeURIComponent(`Check out this link: ${url}`);
     const shareUrl = `mailto:?subject=${subject}&body=${body}`;
     window.location.href = shareUrl;
   };
 
   const handleTelegramClick = () => {
-    const shareUrl = `https://telegram.me/share/url?url=${encodeURIComponent(
+    const shareUrl = `https://telegram.me/share/url?url=${decodeURIComponent(
       url
-    )}&text=${encodeURIComponent(post?.title)}`;
+    )}&text=${decodeURIComponent(post?.title)}`;
     openInNewTab(shareUrl);
   };
 
   const handleWhatsappClick = () => {
-    const shareUrl = `https://wa.me/?text=${encodeURIComponent(
+    const shareUrl = `https://wa.me/?text=${decodeURIComponent(
       post?.title + " " + url
     )}`;
     openInNewTab(shareUrl);
