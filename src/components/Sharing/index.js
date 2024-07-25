@@ -14,19 +14,11 @@ export default function Sharing({ post, category = null, locale }) {
   let url = "";
   // it is post sharing url
   if (category) {
-    url =
-      process.env.NEXT_PUBLIC_APP_URL +
-      locale +
-      "/posts/" +
-      decodeURIComponent(category) +
-      "/" +
-      decodeURIComponent(post?.slug);
+    /* prettier-ignore */
+    url =  process.env.NEXT_PUBLIC_APP_URL + locale + "/posts/" + decodeURIComponent(category) + "/" + decodeURIComponent(post?.slug);
   } else {
-    url =
-      process.env.NEXT_PUBLIC_APP_URL +
-      locale +
-      "/page/" +
-      decodeURIComponent(post?.slug);
+    /* prettier-ignore */
+    url = process.env.NEXT_PUBLIC_APP_URL + locale + "/page/" + decodeURIComponent(post?.slug);
   }
 
   const { t } = useTranslation();
@@ -44,9 +36,8 @@ export default function Sharing({ post, category = null, locale }) {
   // https://www.facebook.com/share_channel/?link=https%3A%2F%2F34news.com%2Fposts%2F%25D8%25AE%25D8%25A8%25D8%25B1-%25D8%25A7%25D8%25B5%25D9%2584%25DB%258C%2F%D8%A7%D9%81%D8%B2%D8%A7%DB%8C%D8%B4-%DA%AF%D8%B1%D9%85%D8%A7-%D8%AF%D8%B1%D9%87%D9%86%D8%AF%D8%9B-%D8%A8%DB%8C%D8%B4-%D8%A7%D8%B2-%D8%AF%D9%88%D8%B5%D8%AF-%D8%AA%D9%86-%D8%AC%D8%A7%D9%86&app_id=966242223397117&source_surface=external_reshare&display&hashtag
 
   const handleTwitterClick = () => {
-    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${decodeURIComponent(
-      post?.title
-    )}`;
+    /* prettier-ignore */
+    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${decodeURIComponent(post?.title)}`;
     openInNewTab(shareUrl);
   };
 
