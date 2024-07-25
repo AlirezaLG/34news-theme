@@ -17,7 +17,7 @@ export default function Sharing({ post, category = null, locale }) {
     url =
       process.env.NEXT_PUBLIC_APP_URL +
       locale +
-      "posts/" +
+      "/posts/" +
       encodeURIComponent(category) +
       "/" +
       encodeURIComponent(post?.slug);
@@ -25,7 +25,7 @@ export default function Sharing({ post, category = null, locale }) {
     url =
       process.env.NEXT_PUBLIC_APP_URL +
       locale +
-      "page/" +
+      "/page/" +
       encodeURIComponent(post?.slug);
   }
 
