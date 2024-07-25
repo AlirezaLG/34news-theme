@@ -10,12 +10,13 @@ import {
 } from "react-share";
 import { useTranslation } from "react-i18next";
 
-export default function Sharing({ post, category = null }) {
+export default function Sharing({ post, category = null, locale }) {
   let url = "";
   // it is post sharing url
   if (category) {
     url =
       process.env.NEXT_PUBLIC_APP_URL +
+      locale +
       "posts/" +
       encodeURIComponent(category) +
       "/" +
@@ -23,6 +24,7 @@ export default function Sharing({ post, category = null }) {
   } else {
     url =
       process.env.NEXT_PUBLIC_APP_URL +
+      locale +
       "page/" +
       encodeURIComponent(post?.slug);
   }

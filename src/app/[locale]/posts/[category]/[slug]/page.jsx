@@ -129,7 +129,7 @@ export default async function SinglePost({
 
           <br />
 
-          <Sharing post={post} category={category} />
+          <Sharing post={post} category={category} locale={locale} />
           {tags && (
             <div className="tags my-5 block xborder-b py-2 xborder-gray-400 ">
               {post.tags.nodes.map((tag) => {
