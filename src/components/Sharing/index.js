@@ -21,12 +21,20 @@ export default function Sharing({ post, category = null, locale }) {
     url = process.env.NEXT_PUBLIC_APP_URL + locale + "/page/" + decodeURIComponent(post?.slug);
   }
 
+  let turl = "";
+  if (category) {
+    /* prettier-ignore */
+    const u = encodeURIComponent (decodeURIComponent(category)) +"/"+ encodeURIComponent(post?.slug);
+    console.log(u);
+    turl = process.env.NEXT_PUBLIC_APP_URL + locale + "/posts/" + u;
+  }
+
   const { t } = useTranslation();
 
   const openInNewTab = (url) => {
     window.open(url, "_blank");
   };
-  console.log(url);
+
   const handleFacebookClick = () => {
     const shareUrl = `http://www.facebook.com/share.php?u=${url}`;
     openInNewTab(shareUrl);
@@ -37,7 +45,10 @@ export default function Sharing({ post, category = null, locale }) {
 
   const handleTwitterClick = () => {
     /* prettier-ignore */
-    const shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${decodeURIComponent(post?.title)}`;
+
+    const shareUrl = `https://twitter.com/intent/tweet?url=${turl}&text=${decodeURIComponent(
+      post?.title
+    )}`;
     openInNewTab(shareUrl);
   };
 
