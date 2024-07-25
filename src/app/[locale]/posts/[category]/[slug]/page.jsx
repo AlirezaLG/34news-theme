@@ -23,6 +23,7 @@ export async function generateMetadata({ params: { category, slug, locale } }) {
 
   const url =
     process.env.NEXT_PUBLIC_APP_URL +
+    locale +
     "/posts/" +
     decodeURIComponent(category) +
     "/" +
